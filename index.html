@@ -143,8 +143,8 @@
     body.dark .submit-button { color: #142017; }
     .auth-note { color: var(--muted); font-size: 10px; line-height: 1.5; }
 
-    /* Writing app */
-    .app { min-height: 100vh; padding-bottom: calc(74px + env(safe-area-inset-bottom)); }
+    /* App header and writing area */
+    .app { min-height: 100vh; }
     header {
       position: sticky;
       top: 0;
@@ -152,16 +152,18 @@
       height: 58px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      gap: 11px;
       padding: 0 16px;
       background: var(--surface);
       border-bottom: 1px solid var(--line);
     }
-    .app .brand { color: var(--ink); font-size: 18px; }
+    .app .brand {
+      color: var(--ink);
+      font-size: 18px;
+      margin-right: auto;
+    }
     .app .brand-icon { background: var(--green); color: white; }
     .app .brand-name span { color: var(--green); }
-    .header-actions { display: flex; gap: 7px; align-items: center; }
     .icon-btn {
       min-width: 38px;
       height: 38px;
@@ -227,21 +229,8 @@
       font: 17px/1.85 Georgia, "Times New Roman", serif;
     }
     textarea::placeholder { color: var(--muted); opacity: .75; }
-    .bottom-nav {
-      position: fixed;
-      z-index: 4;
-      bottom: 0; left: 0; right: 0;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      padding: 7px 8px calc(7px + env(safe-area-inset-bottom));
-      border-top: 1px solid var(--line);
-      background: var(--surface);
-    }
-    .nav-button {
-      min-height: 48px; border: 0; border-radius: 10px;
-      background: transparent; color: var(--muted); font-size: 10px;
-    }
-    .nav-button span { display: block; font-size: 18px; margin-bottom: 2px; }
-    .nav-button.active { color: var(--green); background: var(--green-soft); font-weight: 700; }
+
+    /* Story notes */
     .panel {
       padding: 20px; border: 1px solid var(--line); border-radius: 14px;
       background: var(--surface); box-shadow: var(--shadow);
@@ -254,8 +243,106 @@
       outline-color: var(--green); background: var(--surface); color: var(--ink);
       line-height: 1.6; resize: vertical;
     }
+
+    /* Slide-out navigation drawer */
+    .menu-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      background: #10181070;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s ease;
+    }
+    .menu-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-drawer {
+      position: fixed;
+      z-index: 6;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: min(310px, 86vw);
+      padding: calc(18px + env(safe-area-inset-top)) 16px
+               calc(18px + env(safe-area-inset-bottom));
+      background: var(--surface);
+      box-shadow: 12px 0 35px #0002;
+      transform: translateX(-105%);
+      transition: transform .24s ease;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .mobile-drawer.open { transform: translateX(0); }
+    .drawer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+    .drawer-top .brand { margin: 0; }
+    .drawer-profile {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 14px;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      background: var(--surface-soft);
+    }
+    .drawer-avatar {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      font-weight: 700;
+    }
+    .drawer-profile strong { display: block; font-size: 13px; }
+    .drawer-profile small { color: var(--muted); font-size: 11px; }
+    .drawer-label {
+      margin: 8px 10px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .drawer-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      min-height: 46px;
+      padding: 0 12px;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--ink);
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .drawer-link:active,
+    .drawer-link.active { background: var(--green-soft); color: var(--green); }
+    .drawer-link .drawer-icon {
+      width: 22px;
+      text-align: center;
+      font-size: 17px;
+    }
+    .drawer-footer {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
     .toast {
-      position: fixed; z-index: 8; left: 50%; bottom: 88px;
+      position: fixed; z-index: 8; left: 50%; bottom: 24px;
       transform: translate(-50%, 10px); opacity: 0; pointer-events: none;
       max-width: calc(100% - 32px); padding: 11px 15px;
       border-radius: 10px; background: #293a2d; color: white;
@@ -272,6 +359,7 @@
       .editor-card { min-height: 72vh; }
       .writing-area { padding: 30px 38px; }
       #chapterText { min-height: 50vh; }
+      .mobile-drawer, .menu-backdrop { display: none; }
     }
   </style>
 </head>
@@ -340,12 +428,9 @@
 
   <div class="app hidden" id="app">
     <header>
+      <button class="icon-btn" id="openDrawer" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
       <div class="brand"><span class="brand-icon">✦</span><span class="brand-name">Novel<span>Pea</span></span></div>
-      <div class="header-actions">
-        <button class="icon-btn" id="themeButton" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
-        <button class="icon-btn" id="exportButton" aria-label="Export novel" title="Export novel">↗</button>
-        <button class="icon-btn" id="logoutButton" aria-label="Log out" title="Log out">⇥</button>
-      </div>
+      <button class="icon-btn" id="themeButton" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
     </header>
 
     <main>
@@ -382,14 +467,42 @@
         <textarea id="notesText" placeholder="Write your notes here..."></textarea>
       </section>
     </main>
-
-    <nav class="bottom-nav" aria-label="Main navigation">
-      <button class="nav-button active" data-page="write"><span>✍️</span>Write</button>
-      <button class="nav-button" data-page="notes"><span>🗒️</span>Notes</button>
-      <button class="nav-button" id="newNovelButton"><span>＋</span>New novel</button>
-      <button class="nav-button" id="deleteChapterButton"><span>⌫</span>Delete chapter</button>
-    </nav>
   </div>
+
+  <div class="menu-backdrop" id="menuBackdrop"></div>
+
+  <aside class="mobile-drawer" id="mobileDrawer" aria-label="App navigation" aria-hidden="true">
+    <div class="drawer-top">
+      <div class="brand">
+        <span class="brand-icon">✦</span>
+        <span class="brand-name">Novel<span>Pea</span></span>
+      </div>
+      <button class="icon-btn" id="closeDrawer" type="button" aria-label="Close navigation">✕</button>
+    </div>
+
+    <div class="drawer-profile">
+      <div class="drawer-avatar" id="drawerAvatar">W</div>
+      <div>
+        <strong id="drawerName">Writer</strong>
+        <small>Your writing space</small>
+      </div>
+    </div>
+
+    <div class="drawer-label">Workspace</div>
+    <button class="drawer-link active" data-page="write" type="button"><span class="drawer-icon">✍️</span>Write</button>
+    <button class="drawer-link" data-page="notes" type="button"><span class="drawer-icon">🗒️</span>Story notes</button>
+
+    <div class="drawer-label">Novel</div>
+    <button class="drawer-link" id="drawerNewChapter" type="button"><span class="drawer-icon">＋</span>New chapter</button>
+    <button class="drawer-link" id="drawerNewNovel" type="button"><span class="drawer-icon">📖</span>New novel</button>
+    <button class="drawer-link" id="drawerExport" type="button"><span class="drawer-icon">↗</span>Export novel</button>
+    <button class="drawer-link" id="drawerDeleteChapter" type="button"><span class="drawer-icon">⌫</span>Delete chapter</button>
+
+    <div class="drawer-footer">
+      <button class="drawer-link" id="drawerTheme" type="button"><span class="drawer-icon">🌙</span>Change appearance</button>
+      <button class="drawer-link" id="drawerLogout" type="button"><span class="drawer-icon">⇥</span>Log out</button>
+    </div>
+  </aside>
 
   <div class="toast" id="toast" role="status"></div>
 
@@ -406,10 +519,10 @@
 
     function loadProject() {
       try {
-        return JSON.parse(localStorage.getItem(PROJECT_KEY)) || makeProject();
-      } catch {
-        return makeProject();
-      }
+        const saved = JSON.parse(localStorage.getItem(PROJECT_KEY));
+        if (saved && Array.isArray(saved.chapters) && saved.chapters.length) return saved;
+      } catch {}
+      return makeProject();
     }
 
     let project = loadProject();
@@ -445,10 +558,30 @@
         : "Log in to continue writing.";
     }
 
+    function openDrawer() {
+      $("mobileDrawer").classList.add("open");
+      $("menuBackdrop").classList.add("open");
+      $("mobileDrawer").setAttribute("aria-hidden", "false");
+      $("openDrawer").setAttribute("aria-expanded", "true");
+      $("closeDrawer").focus();
+    }
+
+    function closeDrawer() {
+      $("mobileDrawer").classList.remove("open");
+      $("menuBackdrop").classList.remove("open");
+      $("mobileDrawer").setAttribute("aria-hidden", "true");
+      $("openDrawer").setAttribute("aria-expanded", "false");
+    }
+
     function enterApp(user) {
       localStorage.setItem(SESSION_KEY, "true");
       $("authScreen").classList.add("hidden");
       $("app").classList.remove("hidden");
+
+      const displayName = user.penName || user.fullName || "Writer";
+      $("drawerName").textContent = displayName;
+      $("drawerAvatar").textContent = displayName.charAt(0).toUpperCase();
+
       render();
     }
 
@@ -509,7 +642,9 @@
       enterApp(savedUser);
     });
 
-    $("logoutButton").addEventListener("click", () => {
+    $("logoutButton");
+    $("drawerLogout").addEventListener("click", () => {
+      closeDrawer();
       localStorage.removeItem(SESSION_KEY);
       $("app").classList.add("hidden");
       $("authScreen").classList.remove("hidden");
@@ -554,6 +689,7 @@
     }
 
     function render() {
+      if (!project.chapters.length) project = makeProject(project.title);
       const chapter = activeChapter();
       project.activeChapterId = chapter.id;
       $("novelTitle").value = project.title;
@@ -586,6 +722,8 @@
       const current = activeChapter();
       current.title = $("chapterTitle").value.trim() || "Untitled chapter";
       current.text = $("chapterText").value;
+      project.title = $("novelTitle").value.trim() || "Untitled novel";
+      project.notes = $("notesText").value;
       project.activeChapterId = $("chapterSelect").value;
       persist();
       render();
@@ -595,6 +733,8 @@
       const current = activeChapter();
       current.title = $("chapterTitle").value.trim() || "Untitled chapter";
       current.text = $("chapterText").value;
+      project.title = $("novelTitle").value.trim() || "Untitled novel";
+      project.notes = $("notesText").value;
 
       const chapter = {
         id: crypto.randomUUID(),
@@ -605,11 +745,12 @@
       project.activeChapterId = chapter.id;
       persist();
       render();
+      closeDrawer();
       $("chapterTitle").focus();
       showToast("Chapter added");
     });
 
-    $("deleteChapterButton").addEventListener("click", () => {
+    function deleteCurrentChapter() {
       if (project.chapters.length === 1) {
         showToast("Keep at least one chapter in your novel");
         return;
@@ -620,17 +761,29 @@
       project.activeChapterId = project.chapters[0].id;
       persist();
       render();
+      closeDrawer();
       showToast("Chapter deleted");
-    });
+    }
 
-    $("newNovelButton").addEventListener("click", () => {
+    $("drawerDeleteChapter").addEventListener("click", deleteCurrentChapter);
+
+    $("drawerNewNovel").addEventListener("click", () => {
       if (!confirm("Start a new novel? Your current novel will remain saved on this device.")) return;
       const title = prompt("What would you like to call your new novel?");
       if (!title || !title.trim()) return;
+
+      const current = activeChapter();
+      current.title = $("chapterTitle").value.trim() || "Untitled chapter";
+      current.text = $("chapterText").value;
+      project.title = $("novelTitle").value.trim() || "Untitled novel";
+      project.notes = $("notesText").value;
+      persist();
+
       project = makeProject(title.trim());
       persist();
       render();
       setPage("write");
+      closeDrawer();
       showToast("New novel created");
     });
 
@@ -639,6 +792,7 @@
       current.title = $("chapterTitle").value.trim() || "Untitled chapter";
       current.text = $("chapterText").value;
       project.title = $("novelTitle").value.trim() || "Untitled novel";
+      project.notes = $("notesText").value;
       persist();
 
       const contents = `${project.title}\n\n` + project.chapters
@@ -676,18 +830,39 @@
     function setPage(page) {
       $("editorCard").hidden = page !== "write";
       $("notesPanel").hidden = page !== "notes";
-      document.querySelectorAll(".nav-button[data-page]").forEach(button => {
+      document.querySelectorAll(".drawer-link[data-page]").forEach(button => {
         button.classList.toggle("active", button.dataset.page === page);
       });
       if (page === "notes") $("notesText").focus();
     }
 
-    document.querySelectorAll(".nav-button[data-page]").forEach(button => {
-      button.addEventListener("click", () => setPage(button.dataset.page));
+    document.querySelectorAll(".drawer-link[data-page]").forEach(button => {
+      button.addEventListener("click", () => {
+        setPage(button.dataset.page);
+        closeDrawer();
+      });
     });
 
     $("themeButton").addEventListener("click", () => {
       setTheme(!document.body.classList.contains("dark"));
+    });
+
+    $("drawerTheme").addEventListener("click", () => {
+      setTheme(!document.body.classList.contains("dark"));
+      closeDrawer();
+    });
+
+    $("drawerExport").addEventListener("click", () => {
+      $("exportButton").click();
+      closeDrawer();
+    });
+
+    $("openDrawer").addEventListener("click", openDrawer);
+    $("closeDrawer").addEventListener("click", closeDrawer);
+    $("menuBackdrop").addEventListener("click", closeDrawer);
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeDrawer();
     });
 
     setTheme(localStorage.getItem("novelpea-mobile-theme") === "dark");
