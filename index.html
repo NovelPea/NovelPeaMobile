@@ -542,20 +542,11 @@
     function setTheme(dark) {
       document.body.classList.toggle("dark", dark);
       $("themeButton").textContent = dark ? "☀️" : "🌙";
-      $("themeButton").setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+      $("themeButton").setAttribute(
+        "aria-label",
+        dark ? "Switch to light mode" : "Switch to dark mode"
+      );
       localStorage.setItem("novelpea-mobile-theme", dark ? "dark" : "light");
-    }
-
-    function setAuthMode(mode) {
-      const signup = mode === "signup";
-      $("loginForm").classList.toggle("hidden", signup);
-      $("signupForm").classList.toggle("hidden", !signup);
-      $("loginTab").classList.toggle("active", !signup);
-      $("signupTab").classList.toggle("active", signup);
-      $("authHeading").textContent = signup ? "Create your account" : "Welcome back";
-      $("authSubtitle").textContent = signup
-        ? "Set up your writing space."
-        : "Log in to continue writing.";
     }
 
     function openDrawer() {
@@ -571,6 +562,18 @@
       $("menuBackdrop").classList.remove("open");
       $("mobileDrawer").setAttribute("aria-hidden", "true");
       $("openDrawer").setAttribute("aria-expanded", "false");
+    }
+
+    function setAuthMode(mode) {
+      const signup = mode === "signup";
+      $("loginForm").classList.toggle("hidden", signup);
+      $("signupForm").classList.toggle("hidden", !signup);
+      $("loginTab").classList.toggle("active", !signup);
+      $("signupTab").classList.toggle("active", signup);
+      $("authHeading").textContent = signup ? "Create your account" : "Welcome back";
+      $("authSubtitle").textContent = signup
+        ? "Set up your writing space."
+        : "Log in to continue writing.";
     }
 
     function enterApp(user) {
@@ -642,7 +645,6 @@
       enterApp(savedUser);
     });
 
-    $("logoutButton");
     $("drawerLogout").addEventListener("click", () => {
       closeDrawer();
       localStorage.removeItem(SESSION_KEY);
@@ -757,7 +759,9 @@
       }
       if (!confirm("Delete this chapter? This cannot be undone.")) return;
 
-      project.chapters = project.chapters.filter(chapter => chapter.id !== project.activeChapterId);
+      project.chapters = project.chapters.filter(
+        chapter => chapter.id !== project.activeChapterId
+      );
       project.activeChapterId = project.chapters[0].id;
       persist();
       render();
@@ -787,7 +791,7 @@
       showToast("New novel created");
     });
 
-    $("exportButton").addEventListener("click", () => {
+    function exportNovel() {
       const current = activeChapter();
       current.title = $("chapterTitle").value.trim() || "Untitled chapter";
       current.text = $("chapterText").value;
@@ -806,8 +810,11 @@
       link.download = project.title.replace(/[^\w-]+/g, "-").toLowerCase() + ".txt";
       link.click();
       URL.revokeObjectURL(url);
+      closeDrawer();
       showToast("Novel exported");
-    });
+    }
+
+    $("drawerExport").addEventListener("click", exportNovel);
 
     document.querySelectorAll("[data-mark]").forEach(button => {
       button.addEventListener("click", () => {
@@ -849,11 +856,6 @@
 
     $("drawerTheme").addEventListener("click", () => {
       setTheme(!document.body.classList.contains("dark"));
-      closeDrawer();
-    });
-
-    $("drawerExport").addEventListener("click", () => {
-      $("exportButton").click();
       closeDrawer();
     });
 
