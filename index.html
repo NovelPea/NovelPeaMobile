@@ -87,11 +87,37 @@ textarea::placeholder{color:var(--muted);opacity:.75}
 .panel h2,.profile-panel h2{margin:0 0 7px;font:600 24px Georgia,"Times New Roman",serif}
 .panel>p,.profile-panel>p{color:var(--muted);line-height:1.6}
 .panel textarea{width:100%;min-height:45dvh;padding:12px;border:1px solid var(--line);border-radius:10px;outline-color:var(--green);background:var(--surface);color:var(--ink);line-height:1.6;resize:vertical}
+
+/* Profile */
+.profile-panel{padding:19px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}
+.profile-hero{display:flex;align-items:center;gap:13px;margin:15px 0;padding:18px;border-radius:13px;background:var(--profile-color,#416b4f);color:white}
+.profile-avatar{width:58px;height:58px;display:grid;place-items:center;flex:0 0 auto;border:2px solid #ffffff80;border-radius:50%;background:#ffffff28;font:600 24px Georgia,serif}
+.profile-hero h2{margin:0 0 4px;color:white}
+.profile-hero p{margin:0;color:#ffffffd9;font-size:12px;line-height:1.5}
+.profile-bio{margin:12px 0;white-space:pre-wrap;color:var(--muted);line-height:1.6}
+.profile-details{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.profile-detail{display:inline-block;padding:7px 10px;border-radius:20px;background:var(--green-soft);color:var(--green);font-size:11px;text-decoration:none}
+.profile-section{margin-top:20px;padding-top:17px;border-top:1px solid var(--line)}
+.profile-section h3{margin:0 0 11px;font:600 20px Georgia,serif}
+.profile-books{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.profile-book{min-width:0;padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
+.profile-book-cover{height:112px;display:grid;place-items:center;overflow:hidden;padding:10px;border-radius:8px;color:#fff8df;text-align:center;font:600 16px/1.15 Georgia,serif;overflow-wrap:anywhere}
+.cover-0{background:radial-gradient(circle at 50% 55%,#dfb96e 0 5%,#1b4a42 7% 30%,#102b2a 70%)}
+.cover-1{background:radial-gradient(circle at 50% 48%,#d1ad65 0 4%,#17475a 12%,#071c2b 65%)}
+.cover-2{background:linear-gradient(150deg,#ed7954,#e6b16c 48%,#8f3028)}
+.cover-3{background:radial-gradient(ellipse at 50% 65%,#e7c06f 0 5%,#18483d 7% 28%,#071d20 68%)}
+.cover-4{background:linear-gradient(150deg,#341a33,#b43d4c 55%,#f2a957)}
+.cover-5{background:radial-gradient(circle at 50% 53%,#eacb79 0 5%,#17445b 8% 30%,#091d32 68%)}
+.profile-book-title{margin-top:8px;overflow-wrap:anywhere;font-size:12px;font-weight:700}
+.profile-book-meta{margin-top:4px;color:var(--muted);font-size:10px}
+.profile-empty{padding:13px;border-radius:9px;background:var(--soft);color:var(--muted);font-size:12px;line-height:1.5}
 .profile-card{padding:16px;margin:14px 0;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
-.profile-card h3{margin:0 0 8px;font:600 22px Georgia,serif}
-.profile-card p{white-space:pre-wrap;color:var(--muted);line-height:1.6}
-.profile-form{max-width:560px}
-.profile-form .field textarea{min-height:100px}
+.profile-form{margin-top:17px;padding-top:17px;border-top:1px solid var(--line)}
+.profile-form .field textarea{min-height:90px}
+.profile-form label{display:block}
+.profile-colors{display:flex;flex-wrap:wrap;gap:11px;margin:9px 0 15px}
+.profile-color{width:31px;height:31px;padding:0;border:2px solid var(--surface);border-radius:50%;outline:1px solid var(--line)}
+.profile-color.selected{outline:2px solid var(--ink)}
 .readonly-note{margin:12px 0;padding:11px;border-radius:9px;background:var(--green-soft);color:var(--green);font-size:11px;line-height:1.5}
 .actions{display:flex;gap:8px;margin-top:8px}
 .secondary-button{min-height:42px;padding:0 13px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-weight:650}
@@ -151,6 +177,7 @@ textarea::placeholder{color:var(--muted);opacity:.75}
   #chapterText{min-height:55vh}
   .mobile-drawer,.menu-backdrop{display:none}
   .genre-grid{grid-template-columns:repeat(3,1fr)}
+  .profile-books{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}
 }
 </style>
 </head>
@@ -299,10 +326,12 @@ const toolInfo={
   notes:["Notes","Save loose ideas and reminders for later.","notes"]
 };
 const genres=["Fantasy","Romance","Mystery","Thriller","Science fiction","Horror","Historical fiction","Adventure","Young adult","Literary fiction","Contemporary","Poetry","Nonfiction","Other"];
+const PROFILE_COLORS=["#416b4f","#315b78","#79536f","#a65c3b","#5d658f","#3e7772"];
 const makeId=()=>crypto.randomUUID?.()||"id-"+Date.now()+"-"+Math.random().toString(16).slice(2);
+
 function makeProject(title="My Novel"){
   const chapter={id:makeId(),title:"Chapter One",text:""};
-  return {id:makeId(),title,chapters:[chapter],activeChapterId:chapter.id,bible:"",characters:"",places:"",notes:""};
+  return {id:makeId(),title,genre:"Novel",status:"progress",chapters:[chapter],activeChapterId:chapter.id,bible:"",characters:"",places:"",notes:""};
 }
 function readJSON(key,fallback){
   try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}
@@ -310,6 +339,14 @@ function readJSON(key,fallback){
 let projects=readJSON(PROJECT_KEY,[]);
 if(!Array.isArray(projects))projects=[];
 if(!projects.length){projects=[makeProject()];localStorage.setItem(PROJECT_KEY,JSON.stringify(projects))}
+projects.forEach(project=>{
+  if(!project.genre)project.genre="Novel";
+  if(!project.status)project.status="progress";
+  if(!Array.isArray(project.chapters)||!project.chapters.length){
+    const chapter={id:makeId(),title:"Chapter One",text:""};
+    project.chapters=[chapter];project.activeChapterId=chapter.id;
+  }
+});
 let activeProjectId=localStorage.getItem(PROJECT_KEY+"-active")||projects[0].id;
 let project=projects.find(item=>item.id===activeProjectId)||projects[0];
 let saveTimer=null,tutorialStep=0,currentPage="write";
@@ -362,13 +399,16 @@ function setAuthMode(signup){
 $("loginTab").onclick=()=>setAuthMode(false);
 $("signupTab").onclick=()=>setAuthMode(true);
 
+function updateDrawerUser(user){
+  const name=user.penName||user.fullName||"Writer";
+  $("drawerName").textContent=name;
+  $("drawerAvatar").textContent=name.trim().charAt(0).toUpperCase();
+}
 function enterApp(user,{newAccount=false}={}){
   localStorage.setItem(SESSION_KEY,"true");
   $("authScreen").classList.add("hidden");
   $("app").classList.remove("hidden");
-  const name=user.penName||user.fullName||"Writer";
-  $("drawerName").textContent=name;
-  $("drawerAvatar").textContent=name.charAt(0).toUpperCase();
+  updateDrawerUser(user);
   render();
   if(newAccount&&!user.tutorialCompleted)startTutorial();
 }
@@ -377,17 +417,20 @@ $("signupForm").addEventListener("submit",event=>{
   const age=Number($("age").value);
   const birthday=$("birthday").value;
   if(age<13||age>120){$("signupError").textContent="Enter an age between 13 and 120.";return}
-  if(new Date(birthday)>new Date()){ $("signupError").textContent="Birthday cannot be in the future.";return}
+  if(new Date(birthday)>new Date()){$("signupError").textContent="Birthday cannot be in the future.";return}
   const user={
     fullName:$("fullName").value.trim(),
     penName:$("penName").value.trim(),
     email:$("signupEmail").value.trim().toLowerCase(),
     age,birthday,
     birthplace:$("birthplace").value.trim(),
-    bio:"",genres:[],tutorialCompleted:false,
+    bio:"",location:"",website:"",writingAbout:"",
+    profileColor:PROFILE_COLORS[0],
+    genres:[],tutorialCompleted:false,
     password:$("signupPassword").value
   };
   saveAccount(user);
+  $("signupError").textContent="";
   enterApp(user,{newAccount:true});
 });
 $("loginForm").addEventListener("submit",event=>{
@@ -411,9 +454,7 @@ function persistCurrent(){
   chapter.title=$("chapterTitle").value.trim()||"Untitled chapter";
   chapter.text=$("chapterText").value;
   project.title=$("novelTitle").value.trim()||"Untitled novel";
-  if(currentPage==="bible"||currentPage==="characters"||currentPage==="places"||currentPage==="notes"){
-    project[currentPage]=$("toolText").value;
-  }
+  if(["bible","characters","places","notes"].includes(currentPage))project[currentPage]=$("toolText").value;
   saveProjects();
 }
 function scheduleSave(){
@@ -458,11 +499,12 @@ $("chapterText").addEventListener("input",()=>{updateCounts();scheduleSave()});
 function setPage(page){
   currentPage=page;
   const isWrite=page==="write";
+  const isProfile=page==="profile";
   $("chapterPicker").classList.toggle("hidden",!isWrite);
   $("editorCard").classList.toggle("hidden",!isWrite);
-  $("toolPanel").classList.toggle("hidden",isWrite||page==="profile");
-  $("profilePanel").classList.toggle("hidden",page!=="profile");
-  if(!isWrite&&page!=="profile"){
+  $("toolPanel").classList.toggle("hidden",isWrite||isProfile);
+  $("profilePanel").classList.toggle("hidden",!isProfile);
+  if(!isWrite&&!isProfile){
     const [title,description]=toolInfo[page];
     $("toolTitle").textContent=title;
     $("toolDescription").textContent=description;
@@ -530,49 +572,138 @@ document.querySelectorAll("[data-mark]").forEach(button=>{
   };
 });
 
-function showProfile(){
-  persistCurrent();setPage("profile");
-  const user=account();
-  const panel=$("profilePanel");panel.replaceChildren();
-  const heading=document.createElement("h2");heading.textContent="Your profile";
-  const intro=document.createElement("p");intro.textContent="View your profile details and edit your name, bio, or birthplace.";
-  const card=document.createElement("div");card.className="profile-card";
-  const pen=document.createElement("h3");pen.textContent=user.penName||"Writer";
-  const bio=document.createElement("p");bio.textContent=user.bio||"No bio yet.";
-  const birthplace=document.createElement("p");birthplace.textContent=user.birthplace?"Birthplace: "+user.birthplace:"Birthplace not added.";
-  const full=document.createElement("p");full.textContent=user.fullName||"";
-  const edit=document.createElement("button");edit.className="button";edit.type="button";edit.textContent="Edit profile";
-  edit.onclick=()=>renderProfileEditor(user);
-  card.append(pen,bio,birthplace,full,edit);panel.append(heading,intro,card);
+/* Profile and novel showcase */
+function renderProfileNovels(container){
+  const section=document.createElement("section");section.className="profile-section";
+  const heading=document.createElement("h3");heading.textContent="Novels";
+  section.append(heading);
+
+  if(!projects.length){
+    const empty=document.createElement("div");empty.className="profile-empty";empty.textContent="No novels to show yet.";
+    section.append(empty);container.append(section);return;
+  }
+
+  const books=document.createElement("div");books.className="profile-books";
+  projects.forEach((novel,index)=>{
+    const card=document.createElement("article");card.className="profile-book";
+    const cover=document.createElement("div");cover.className="profile-book-cover cover-"+(index%6);cover.textContent=novel.title||"Untitled novel";
+    const title=document.createElement("div");title.className="profile-book-title";title.textContent=novel.title||"Untitled novel";
+    const meta=document.createElement("div");meta.className="profile-book-meta";
+    const count=(novel.chapters||[]).length;
+    meta.textContent=(novel.genre||"Novel")+" · "+count+" chapter"+(count===1?"":"s");
+    card.append(cover,title,meta);books.append(card);
+  });
+  section.append(books);container.append(section);
 }
-function renderProfileEditor(user){
+
+function showProfile(){
+  persistCurrent();
+  setPage("profile");
+  const user=account();
+  if(!user)return;
+  renderProfile(user,false);
+}
+function renderProfile(user,editing){
   const panel=$("profilePanel");panel.replaceChildren();
-  const heading=document.createElement("h2");heading.textContent="Edit profile";
-  const intro=document.createElement("p");intro.textContent="Update your full name, bio, and birthplace. Your pen name and account details can’t be changed.";
-  const locked=document.createElement("div");locked.className="readonly-note";
-  locked.textContent=`Pen name: ${user.penName||"Writer"} · Email and other account details are fixed after signup.`;
-  const form=document.createElement("form");form.className="profile-form";
-  form.innerHTML=`
-    <div class="field"><label for="editFullName">Full name</label><input id="editFullName" maxlength="100" required></div>
-    <div class="field"><label for="editBio">Bio</label><textarea id="editBio" maxlength="500" placeholder="Tell readers a little about yourself"></textarea></div>
-    <div class="field"><label for="editBirthplace">Birthplace</label><input id="editBirthplace" maxlength="100" placeholder="City or region"></div>
-    <p class="form-error" id="profileError"></p>
-    <div class="actions"><button class="secondary-button" id="cancelProfile" type="button">Cancel</button><button class="primary-button" type="submit">Save profile</button></div>`;
-  panel.append(heading,intro,locked,form);
-  $("editFullName").value=user.fullName||"";
-  $("editBio").value=user.bio||"";
-  $("editBirthplace").value=user.birthplace||"";
-  $("cancelProfile").onclick=showProfile;
-  form.onsubmit=event=>{
-    event.preventDefault();
-    user.fullName=$("editFullName").value.trim();
-    user.bio=$("editBio").value.trim();
-    user.birthplace=$("editBirthplace").value.trim();
-    saveAccount(user);
-    const name=user.penName||user.fullName||"Writer";
-    $("drawerName").textContent=name;$("drawerAvatar").textContent=name.charAt(0).toUpperCase();
-    toast("Profile saved.");showProfile();
-  };
+
+  const isTeen=Number(user.age)>=13&&Number(user.age)<=17;
+  if(isTeen){
+    const notice=document.createElement("div");notice.className="readonly-note";
+    notice.textContent="Your profile is private because this account belongs to someone aged 13–17. Only you can see it.";
+    panel.append(notice);
+  }
+
+  const hero=document.createElement("div");hero.className="profile-hero";
+  hero.style.setProperty("--profile-color",user.profileColor||PROFILE_COLORS[0]);
+  const avatar=document.createElement("div");avatar.className="profile-avatar";
+  avatar.textContent=(user.penName||user.fullName||"W").trim().charAt(0).toUpperCase();
+  const intro=document.createElement("div");
+  const name=document.createElement("h2");name.textContent=user.penName||"Writer";
+  const tagline=document.createElement("p");tagline.textContent=user.writingAbout||"NovelPea writer";
+  intro.append(name,tagline);hero.append(avatar,intro);panel.append(hero);
+
+  if(user.bio){
+    const bio=document.createElement("p");bio.className="profile-bio";bio.textContent=user.bio;panel.append(bio);
+  }
+
+  const details=document.createElement("div");details.className="profile-details";
+  if(user.location){
+    const location=document.createElement("span");location.className="profile-detail";location.textContent="⌖ "+user.location;details.append(location);
+  }
+  if(user.birthplace){
+    const birthplace=document.createElement("span");birthplace.className="profile-detail";birthplace.textContent="Born in "+user.birthplace;details.append(birthplace);
+  }
+  if(user.website){
+    const link=document.createElement("a");link.className="profile-detail";link.textContent="↗ Website";
+    let url=user.website.trim();if(url&&!/^https?:\/\//i.test(url))url="https://"+url;
+    link.href=url;link.target="_blank";link.rel="noopener noreferrer";details.append(link);
+  }
+  if(details.children.length)panel.append(details);
+
+  if(!editing){
+    const edit=document.createElement("button");edit.className="button primary";edit.type="button";edit.textContent="Customize profile";
+    edit.onclick=()=>renderProfile(user,true);panel.append(edit);
+  }
+
+  renderProfileNovels(panel);
+
+  if(editing){
+    const form=document.createElement("form");form.className="profile-form";
+    form.innerHTML=`
+      <h2>Customize your profile</h2>
+      <div class="field"><label for="editFullName">Full name</label><input id="editFullName" maxlength="100" required></div>
+      <div class="field"><label for="editBio">Bio</label><textarea id="editBio" maxlength="500" placeholder="Tell readers a little about yourself"></textarea></div>
+      <div class="field"><label for="editBirthplace">Birthplace</label><input id="editBirthplace" maxlength="100" placeholder="City or region"></div>
+      <div class="field"><label for="editLocation">Current location (optional)</label><input id="editLocation" maxlength="80" placeholder="City, country"></div>
+      <div class="field"><label for="editWebsite">Website (optional)</label><input id="editWebsite" maxlength="200" type="text" placeholder="yourwebsite.com"></div>
+      <div class="field"><label for="editWritingAbout">About my writing</label><input id="editWritingAbout" maxlength="100" placeholder="Fantasy writer, aspiring novelist…"></div>
+      <div class="field">
+        <label>Profile color</label>
+        <div class="profile-colors" id="profileColors"></div>
+      </div>
+      <p class="form-error" id="profileError"></p>
+      <div class="actions">
+        <button class="secondary-button" id="cancelProfile" type="button">Cancel</button>
+        <button class="primary-button" type="submit">Save profile</button>
+      </div>`;
+    panel.append(form);
+
+    $("editFullName").value=user.fullName||"";
+    $("editBio").value=user.bio||"";
+    $("editBirthplace").value=user.birthplace||"";
+    $("editLocation").value=user.location||"";
+    $("editWebsite").value=user.website||"";
+    $("editWritingAbout").value=user.writingAbout||"";
+
+    let selectedColor=user.profileColor||PROFILE_COLORS[0];
+    const colorList=$("profileColors");
+    PROFILE_COLORS.forEach(color=>{
+      const button=document.createElement("button");button.type="button";
+      button.className="profile-color"+(color===selectedColor?" selected":"");
+      button.style.background=color;button.setAttribute("aria-label","Choose profile color "+color);
+      button.onclick=()=>{
+        selectedColor=color;
+        colorList.querySelectorAll("button").forEach(item=>item.classList.remove("selected"));
+        button.classList.add("selected");
+        hero.style.setProperty("--profile-color",color);
+      };
+      colorList.append(button);
+    });
+
+    $("cancelProfile").onclick=()=>renderProfile(user,false);
+    form.onsubmit=event=>{
+      event.preventDefault();
+      user.fullName=$("editFullName").value.trim();
+      user.bio=$("editBio").value.trim();
+      user.birthplace=$("editBirthplace").value.trim();
+      user.location=$("editLocation").value.trim();
+      user.website=$("editWebsite").value.trim();
+      user.writingAbout=$("editWritingAbout").value.trim();
+      user.profileColor=selectedColor;
+      saveAccount(user);updateDrawerUser(user);
+      toast("Profile saved.");renderProfile(user,false);
+    };
+  }
 }
 $("drawerProfile").onclick=()=>{showProfile();closeDrawer()};
 
@@ -581,7 +712,7 @@ const tutorialSteps=[
   ["Welcome to NovelPea","This is your writing space. We’ll take a quick tour, and you can skip it whenever you like.","Your work is saved in this browser on this device."],
   ["Write your manuscript","Type in the large editor. Tap the chapter title to rename it. Your writing saves automatically.","Use the chapter picker to switch chapters, or tap ＋ Chapter to add one."],
   ["Plan your story","Open the menu to find Story Bible, Characters, Places, and Notes. Each section saves separately with your novel.","The formatting buttons work on text you select in the editor."],
-  ["Manage your novel","The menu also lets you create a novel, delete a chapter, or export your manuscript as a text file.","Use the moon/sun button to switch appearance. View profile opens your profile."]
+  ["Manage your novel","The menu also lets you create a novel, delete a chapter, or export your manuscript as a text file.","Use the moon/sun button to switch appearance. View profile opens your profile, where you can customize it and show your novels."]
 ];
 function startTutorial(){tutorialStep=0;$("onboarding").classList.remove("hidden");renderTutorial()}
 function renderTutorial(){
