@@ -6,26 +6,14 @@
 <meta name="theme-color" content="#f8f7f2">
 <title>NovelPea</title>
 <style>
-:root{
-  color-scheme:light;
-  --bg:#f8f7f2;--surface:#fff;--soft:#f1f4ed;--ink:#242b26;
-  --muted:#7c837d;--green:#416b4f;--green-soft:#e9f0e8;--line:#e7e9e1;
-  --shadow:0 8px 28px #24332812
-}
-body.dark{
-  color-scheme:dark;
-  --bg:#171c18;--surface:#222923;--soft:#29392d;--ink:#e8ece7;
-  --muted:#a1aaa2;--green:#8bb896;--green-soft:#29392d;--line:#343c35;
-  --shadow:0 8px 28px #0004
-}
+:root{color-scheme:light;--bg:#f8f7f2;--surface:#fff;--soft:#f1f4ed;--ink:#242b26;--muted:#7c837d;--green:#416b4f;--green-soft:#e9f0e8;--line:#e7e9e1;--shadow:0 8px 28px #24332812}
+body.dark{color-scheme:dark;--bg:#171c18;--surface:#222923;--soft:#29392d;--ink:#e8ece7;--muted:#a1aaa2;--green:#8bb896;--green-soft:#29392d;--line:#343c35;--shadow:0 8px 28px #0004}
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;min-height:100dvh;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer;color:inherit}
 .hidden,[hidden]{display:none!important}
 button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #63a27d;outline-offset:2px}
-
-/* Authentication */
 .auth-screen{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:var(--surface)}
 .auth-banner{min-height:205px;padding:23px;display:flex;flex-direction:column;justify-content:space-between;color:white;background:linear-gradient(145deg,#365b42,#77926d)}
 .brand{display:flex;align-items:center;gap:9px;font-size:20px;font-weight:750;letter-spacing:-.4px}
@@ -49,8 +37,6 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 body.dark .submit-button,body.dark .primary-button{color:#142017}
 .auth-content form>.submit-button{width:100%}
 .auth-note{color:var(--muted);font-size:10px;line-height:1.5}
-
-/* App */
 .app{min-height:100vh;min-height:100dvh}
 header{position:sticky;top:0;z-index:3;height:56px;display:flex;align-items:center;gap:9px;padding:0 12px;background:var(--surface);border-bottom:1px solid var(--line)}
 .app-brand{display:flex;align-items:center;gap:8px;margin-right:auto;font-size:17px;font-weight:750}
@@ -77,8 +63,6 @@ main{width:min(760px,100%);margin:0 auto;padding:16px 13px 30px}
 #chapterTitle{width:100%;margin:0 0 16px;padding:0;border:0;outline:0;resize:none;overflow:hidden;background:transparent;color:var(--ink);font:600 27px/1.2 Georgia,"Times New Roman",serif}
 #chapterText{width:100%;min-height:52dvh;padding:0;border:0;outline:0;resize:vertical;background:transparent;color:var(--ink);font:17px/1.8 Georgia,"Times New Roman",serif}
 textarea::placeholder{color:var(--muted);opacity:.75}
-
-/* Panels and profile */
 .panel{padding:19px}
 .panel h2,.profile-panel h2{margin:0 0 7px;font:600 24px Georgia,"Times New Roman",serif}
 .panel>p,.profile-panel>p{color:var(--muted);line-height:1.6}
@@ -132,8 +116,6 @@ textarea::placeholder{color:var(--muted);opacity:.75}
 .settings-danger h3{margin:0 0 7px;color:#b74b3c;font:600 20px Georgia,serif}
 .settings-danger p{color:var(--muted);font-size:13px;line-height:1.6}
 .settings-delete{min-height:42px;padding:0 13px;border:1px solid #d9a6a0;border-radius:10px;background:var(--surface);color:#b74b3c;font-weight:700}
-
-/* Drawer */
 .menu-backdrop{position:fixed;inset:0;z-index:5;background:#10181070;opacity:0;pointer-events:none;transition:opacity .22s}
 .menu-backdrop.open{opacity:1;pointer-events:auto}
 .mobile-drawer{position:fixed;z-index:6;top:0;bottom:0;left:0;width:min(320px,88vw);padding:calc(16px + env(safe-area-inset-top)) 15px calc(16px + env(safe-area-inset-bottom));display:flex;flex-direction:column;overflow-y:auto;background:var(--surface);box-shadow:12px 0 35px #0002;transform:translateX(-105%);transition:transform .24s}
@@ -149,8 +131,6 @@ textarea::placeholder{color:var(--muted);opacity:.75}
 .drawer-link:hover,.drawer-link.active{background:var(--green-soft);color:var(--green)}
 .drawer-icon{width:22px;text-align:center;font-size:17px}
 .drawer-footer{margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
-
-/* Tutorial, publish dialog, and toast */
 .onboarding,.publish-dialog-backdrop{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:16px;background:#10231dcc}
 .onboarding-card,.publish-dialog{width:min(100%,560px);max-height:calc(100dvh - 32px);overflow:auto;padding:23px;border:1px solid var(--line);border-radius:17px;background:var(--surface);box-shadow:0 25px 80px #0003}
 .onboarding-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
@@ -191,9 +171,7 @@ textarea::placeholder{color:var(--muted);opacity:.75}
   .genre-grid{grid-template-columns:repeat(3,1fr)}
   .profile-books{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}
 }
-@media(max-width:420px){
-  .publish-dialog{padding:15px}
-}
+@media(max-width:420px){.publish-dialog{padding:15px}}
 </style>
 </head>
 <body>
@@ -264,10 +242,7 @@ textarea::placeholder{color:var(--muted);opacity:.75}
         <textarea id="chapterText" aria-label="Write your novel" placeholder="Start writing your story..."></textarea>
       </div>
     </section>
-    <section class="panel hidden" id="toolPanel">
-      <h2 id="toolTitle"></h2><p id="toolDescription"></p>
-      <textarea id="toolText" placeholder="Write here..."></textarea>
-    </section>
+    <section class="panel hidden" id="toolPanel"><h2 id="toolTitle"></h2><p id="toolDescription"></p><textarea id="toolText" placeholder="Write here..."></textarea></section>
     <section class="profile-panel hidden" id="profilePanel"></section>
     <section class="profile-panel hidden" id="settingsPanel"></section>
   </main>
@@ -279,10 +254,7 @@ textarea::placeholder{color:var(--muted);opacity:.75}
     <div class="app-brand"><span class="brand-icon">✦</span><span>Novel<span>Pea</span></span></div>
     <button class="icon-btn" id="closeDrawer" type="button" aria-label="Close navigation">✕</button>
   </div>
-  <div class="drawer-profile">
-    <div class="drawer-avatar" id="drawerAvatar">W</div>
-    <div><strong id="drawerName">Writer</strong><small>Your writing space</small></div>
-  </div>
+  <div class="drawer-profile"><div class="drawer-avatar" id="drawerAvatar">W</div><div><strong id="drawerName">Writer</strong><small>Your writing space</small></div></div>
   <div class="drawer-label">Workspace</div>
   <button class="drawer-link active" data-page="write" type="button"><span class="drawer-icon">✍️</span>Manuscript</button>
   <button class="drawer-link" data-page="bible" type="button"><span class="drawer-icon">✧</span>Story Bible</button>
@@ -305,10 +277,7 @@ textarea::placeholder{color:var(--muted);opacity:.75}
 
 <div class="onboarding hidden" id="onboarding" role="dialog" aria-modal="true" aria-labelledby="onboardingTitle">
   <div class="onboarding-card">
-    <div class="onboarding-top">
-      <div class="onboarding-brand"><span class="brand-icon">✦</span> NovelPea tour</div>
-      <span class="onboarding-count" id="onboardingCount"></span>
-    </div>
+    <div class="onboarding-top"><div class="onboarding-brand"><span class="brand-icon">✦</span> NovelPea tour</div><span class="onboarding-count" id="onboardingCount"></span></div>
     <div id="onboardingContent"></div>
     <div class="onboarding-actions" id="onboardingActions"></div>
   </div>
@@ -319,22 +288,10 @@ textarea::placeholder{color:var(--muted);opacity:.75}
     <h2 id="publishDialogTitle">Publish your novel</h2>
     <p class="publish-dialog-intro">Add the details readers will see. You can skip the cover; the other fields are required.</p>
     <form id="publishForm">
-      <div class="field">
-        <label for="publishTitle">Novel title</label>
-        <input id="publishTitle" maxlength="120" required>
-      </div>
-      <div class="field">
-        <label for="publishShortDescription">Short description</label>
-        <textarea id="publishShortDescription" maxlength="240" required placeholder="A brief hook for readers (up to 240 characters)"></textarea>
-      </div>
-      <div class="field">
-        <label for="publishLongDescription">Long description</label>
-        <textarea id="publishLongDescription" maxlength="3000" required placeholder="Tell readers more about the story (up to 3,000 characters)"></textarea>
-      </div>
-      <div class="field">
-        <label>Genres — choose at least one</label>
-        <div class="publish-genre-list" id="publishGenreList"></div>
-      </div>
+      <div class="field"><label for="publishTitle">Novel title</label><input id="publishTitle" maxlength="120" required></div>
+      <div class="field"><label for="publishShortDescription">Short description</label><textarea id="publishShortDescription" maxlength="240" required placeholder="A brief hook for readers (up to 240 characters)"></textarea></div>
+      <div class="field"><label for="publishLongDescription">Long description</label><textarea id="publishLongDescription" maxlength="3000" required placeholder="Tell readers more about the story (up to 3,000 characters)"></textarea></div>
+      <div class="field"><label>Genres — choose at least one</label><div class="publish-genre-list" id="publishGenreList"></div></div>
       <div class="field">
         <label for="publishCover">Cover image (optional)</label>
         <input id="publishCover" type="file" accept="image/*">
@@ -350,45 +307,26 @@ textarea::placeholder{color:var(--muted);opacity:.75}
     </form>
   </section>
 </div>
-
 <div class="toast" id="toast" role="status"></div>
 
 <script>
-"use strict";
-
 const $=id=>document.getElementById(id);
 const ACCOUNT_KEY="novelpea-mobile-account-v2";
 const SESSION_KEY="novelpea-mobile-session-v2";
 const PROJECT_KEY="novelpea-mobile-project-v2";
-
-const toolInfo={
-  bible:["Story Bible","Keep worldbuilding, themes, rules, and plot details together."],
-  characters:["Characters","Track character details, goals, and relationships."],
-  places:["Places","Describe settings and important locations in your story."],
-  notes:["Notes","Save loose ideas and reminders for later."]
-};
+const toolInfo={bible:["Story Bible","Keep worldbuilding, themes, rules, and plot details together."],characters:["Characters","Track character details, goals, and relationships."],places:["Places","Describe settings and important locations in your story."],notes:["Notes","Save loose ideas and reminders for later."]};
 const genres=["Fantasy","Romance","Mystery","Thriller","Science fiction","Horror","Historical fiction","Adventure","Young adult","Literary fiction","Contemporary","Poetry","Nonfiction","Other"];
 const PROFILE_COLORS=["#416b4f","#315b78","#79536f","#a65c3b","#5d658f","#3e7772"];
 const makeId=()=>window.crypto?.randomUUID?.()||"id-"+Date.now()+"-"+Math.random().toString(16).slice(2);
 
 function makeProject(title="My Novel"){
   const chapter={id:makeId(),title:"Chapter One",text:""};
-  return {
-    id:makeId(),title,genre:"Novel",genres:[],status:"progress",
-    shortDescription:"",longDescription:"",coverImage:"",
-    chapters:[chapter],activeChapterId:chapter.id,
-    bible:"",characters:"",places:"",notes:""
-  };
+  return {id:makeId(),title,genre:"Novel",genres:[],status:"progress",shortDescription:"",longDescription:"",coverImage:"",chapters:[chapter],activeChapterId:chapter.id,bible:"",characters:"",places:"",notes:""};
 }
-function readJSON(key,fallback){
-  try{return JSON.parse(localStorage.getItem(key))??fallback}
-  catch{return fallback}
-}
-
+function readJSON(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}}
 let projects=readJSON(PROJECT_KEY,[]);
 if(!Array.isArray(projects))projects=[];
 if(!projects.length)projects=[makeProject()];
-
 projects.forEach(item=>{
   if(!item.genre)item.genre="Novel";
   if(!Array.isArray(item.genres))item.genres=[];
@@ -398,22 +336,17 @@ projects.forEach(item=>{
   if(!item.status)item.status="progress";
   if(!Array.isArray(item.chapters)||!item.chapters.length){
     const chapter={id:makeId(),title:"Chapter One",text:""};
-    item.chapters=[chapter];
-    item.activeChapterId=chapter.id;
+    item.chapters=[chapter];item.activeChapterId=chapter.id;
   }
   item.chapters.forEach(chapter=>{
     if(!chapter.id)chapter.id=makeId();
     if(typeof chapter.title!=="string")chapter.title="";
     if(typeof chapter.text!=="string")chapter.text="";
   });
-  if(!item.activeChapterId||!item.chapters.some(ch=>ch.id===item.activeChapterId)){
-    item.activeChapterId=item.chapters[0].id;
-  }
+  if(!item.activeChapterId||!item.chapters.some(ch=>ch.id===item.activeChapterId))item.activeChapterId=item.chapters[0].id;
 });
-
 let project=projects.find(item=>item.id===localStorage.getItem(PROJECT_KEY+"-active"))||projects[0];
-let saveTimer=null,tutorialStep=0,currentPage="write",toastTimer=null;
-let publishingNovel=null,pendingCoverData="";
+let saveTimer=null,tutorialStep=0,currentPage="write",toastTimer=null,publishingNovel=null,pendingCoverData="";
 
 function account(){return readJSON(ACCOUNT_KEY,null)}
 function saveAccount(user){localStorage.setItem(ACCOUNT_KEY,JSON.stringify(user))}
@@ -421,32 +354,19 @@ function saveProjects(){
   try{
     localStorage.setItem(PROJECT_KEY,JSON.stringify(projects));
     localStorage.setItem(PROJECT_KEY+"-active",project.id);
-  }catch(error){
-    console.error(error);
-    toast("Could not save. Browser storage may be full.");
-  }
+  }catch(error){console.error(error);toast("Could not save. Browser storage may be full.")}
 }
-function activeChapter(){
-  return project.chapters.find(chapter=>chapter.id===project.activeChapterId)||project.chapters[0];
-}
+function activeChapter(){return project.chapters.find(chapter=>chapter.id===project.activeChapterId)||project.chapters[0]}
 function toast(message){
   $("toast").textContent=message;
   $("toast").classList.add("show");
   clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>$("toast").classList.remove("show"),2500);
 }
-function wordCount(text){
-  const clean=(text||"").trim();
-  return clean?clean.split(/\s+/u).length:0;
-}
-function novelWords(novel){
-  return (novel.chapters||[]).reduce((sum,chapter)=>sum+wordCount(chapter.text),0);
-}
-function canPublish(novel){
-  return novel.chapters.length>=3&&novelWords(novel)>=2500;
-}
+function wordCount(text){const clean=(text||"").trim();return clean?clean.split(/\s+/u).length:0}
+function novelWords(novel){return(novel.chapters||[]).reduce((sum,chapter)=>sum+wordCount(chapter.text),0)}
+function canPublish(novel){return novel.chapters.length>=3&&novelWords(novel)>=2500}
 
-/* Theme */
 function setTheme(dark){
   document.body.classList.toggle("dark",dark);
   $("themeButton").textContent=dark?"☀️":"🌙";
@@ -454,29 +374,17 @@ function setTheme(dark){
   localStorage.setItem("novelpea-mobile-theme",dark?"dark":"light");
 }
 $("themeButton").onclick=()=>setTheme(!document.body.classList.contains("dark"));
-$("drawerTheme").onclick=()=>{
-  setTheme(!document.body.classList.contains("dark"));
-  closeDrawer();
-};
+$("drawerTheme").onclick=()=>{setTheme(!document.body.classList.contains("dark"));closeDrawer()};
 
-/* Navigation drawer */
 function openDrawer(){
-  $("mobileDrawer").classList.add("open");
-  $("menuBackdrop").classList.add("open");
-  $("mobileDrawer").setAttribute("aria-hidden","false");
-  $("openDrawer").setAttribute("aria-expanded","true");
-  $("closeDrawer").focus();
+  $("mobileDrawer").classList.add("open");$("menuBackdrop").classList.add("open");
+  $("mobileDrawer").setAttribute("aria-hidden","false");$("openDrawer").setAttribute("aria-expanded","true");$("closeDrawer").focus();
 }
 function closeDrawer(){
-  $("mobileDrawer").classList.remove("open");
-  $("menuBackdrop").classList.remove("open");
-  $("mobileDrawer").setAttribute("aria-hidden","true");
-  $("openDrawer").setAttribute("aria-expanded","false");
+  $("mobileDrawer").classList.remove("open");$("menuBackdrop").classList.remove("open");
+  $("mobileDrawer").setAttribute("aria-hidden","true");$("openDrawer").setAttribute("aria-expanded","false");
 }
-$("openDrawer").onclick=openDrawer;
-$("closeDrawer").onclick=closeDrawer;
-$("menuBackdrop").onclick=closeDrawer;
-
+$("openDrawer").onclick=openDrawer;$("closeDrawer").onclick=closeDrawer;$("menuBackdrop").onclick=closeDrawer;
 document.addEventListener("keydown",event=>{
   if(event.key==="Escape"){
     closeDrawer();
@@ -485,386 +393,180 @@ document.addEventListener("keydown",event=>{
   }
 });
 
-/* Authentication */
 function setAuthMode(signup){
-  $("loginForm").classList.toggle("hidden",signup);
-  $("signupForm").classList.toggle("hidden",!signup);
-  $("loginTab").classList.toggle("active",!signup);
-  $("signupTab").classList.toggle("active",signup);
+  $("loginForm").classList.toggle("hidden",signup);$("signupForm").classList.toggle("hidden",!signup);
+  $("loginTab").classList.toggle("active",!signup);$("signupTab").classList.toggle("active",signup);
   $("authHeading").textContent=signup?"Create your account":"Welcome back";
   $("authSubtitle").textContent=signup?"Set up your writing space.":"Log in to continue writing.";
 }
-$("loginTab").onclick=()=>setAuthMode(false);
-$("signupTab").onclick=()=>setAuthMode(true);
+$("loginTab").onclick=()=>setAuthMode(false);$("signupTab").onclick=()=>setAuthMode(true);
 
 function updateDrawerUser(user){
   const name=user.penName||user.fullName||"Writer";
-  $("drawerName").textContent=name;
-  $("drawerAvatar").textContent=name.trim().charAt(0).toUpperCase()||"W";
+  $("drawerName").textContent=name;$("drawerAvatar").textContent=name.trim().charAt(0).toUpperCase()||"W";
 }
 function enterApp(user,{newAccount=false}={}){
-  localStorage.setItem(SESSION_KEY,"true");
-  $("authScreen").classList.add("hidden");
-  $("app").classList.remove("hidden");
-  updateDrawerUser(user);
-  render();
+  $("authScreen").classList.add("hidden");$("app").classList.remove("hidden");
+  updateDrawerUser(user);render();
   if(newAccount&&!user.tutorialCompleted)startTutorial();
 }
-
 $("signupForm").addEventListener("submit",event=>{
   event.preventDefault();
-  const age=Number($("age").value);
-  const birthday=$("birthday").value;
-
-  if(age<13||age>120){
-    $("signupError").textContent="Enter an age between 13 and 120.";
-    return;
-  }
-  if(!birthday||new Date(birthday)>new Date()){
-    $("signupError").textContent="Enter a valid birthday that is not in the future.";
-    return;
-  }
-
-  const existing=account();
+  const age=Number($("age").value),birthday=$("birthday").value;
+  if(age<13||age>120){$("signupError").textContent="Enter an age between 13 and 120.";return}
+  if(!birthday||new Date(birthday)>new Date()){$("signupError").textContent="Enter a valid birthday that is not in the future.";return}
   const email=$("signupEmail").value.trim().toLowerCase();
-  if(existing&&existing.email===email){
-    $("signupError").textContent="An account with that email already exists. Please log in.";
-    return;
-  }
-
+  const existing=account();
+  if(existing&&existing.email===email){$("signupError").textContent="An account with that email already exists. Please log in.";return}
   const user={
-    fullName:$("fullName").value.trim(),
-    penName:$("penName").value.trim(),
-    email,
-    age,birthday,
-    birthplace:$("birthplace").value.trim(),
-    bio:"",location:"",website:"",writingAbout:"",
-    profileColor:PROFILE_COLORS[0],genres:[],
-    tutorialCompleted:false,
-    password:$("signupPassword").value
+    fullName:$("fullName").value.trim(),penName:$("penName").value.trim(),email,age,birthday,
+    birthplace:$("birthplace").value.trim(),bio:"",location:"",website:"",writingAbout:"",
+    profileColor:PROFILE_COLORS[0],genres:[],tutorialCompleted:false,password:$("signupPassword").value
   };
-
-  saveAccount(user);
-  $("signupError").textContent="";
-  enterApp(user,{newAccount:true});
+  saveAccount(user);$("signupError").textContent="";enterApp(user,{newAccount:true});
 });
-
 $("loginForm").addEventListener("submit",event=>{
   event.preventDefault();
   const user=account();
-
   if(!user||user.email!==$("loginEmail").value.trim().toLowerCase()||user.password!==$("loginPassword").value){
-    $("loginError").textContent="Email or password is incorrect.";
-    return;
+    $("loginError").textContent="Email or password is incorrect.";return;
   }
-
-  $("loginError").textContent="";
-  enterApp(user);
+  $("loginError").textContent="";enterApp(user);
 });
-
 $("drawerLogout").onclick=()=>{
-  closeDrawer();
-  persistCurrent();
-  localStorage.removeItem(SESSION_KEY);
-  $("app").classList.add("hidden");
-  $("authScreen").classList.remove("hidden");
-  $("onboarding").classList.add("hidden");
-  setAuthMode(false);
+  closeDrawer();persistCurrent();$("app").classList.add("hidden");$("authScreen").classList.remove("hidden");$("onboarding").classList.add("hidden");setAuthMode(false);
 };
 
-/* Manuscript saving and editing */
 function persistCurrent(){
   const chapter=activeChapter();
-  if(chapter){
-    chapter.title=$("chapterTitle").value.trim()||"Untitled chapter";
-    chapter.text=$("chapterText").value;
-  }
+  if(chapter){chapter.title=$("chapterTitle").value.trim()||"Untitled chapter";chapter.text=$("chapterText").value}
   if($("novelTitle"))project.title=$("novelTitle").value.trim()||"Untitled novel";
-  if(["bible","characters","places","notes"].includes(currentPage)){
-    project[currentPage]=$("toolText").value;
-  }
+  if(["bible","characters","places","notes"].includes(currentPage))project[currentPage]=$("toolText").value;
   saveProjects();
 }
 function scheduleSave(){
-  $("saveLabel").textContent="Saving…";
-  clearTimeout(saveTimer);
-  saveTimer=setTimeout(()=>{
-    persistCurrent();
-    renderChapterOptions();
-    $("saveLabel").textContent="Saved on this device";
-  },350);
+  $("saveLabel").textContent="Saving…";clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{persistCurrent();renderChapterOptions();$("saveLabel").textContent="Saved on this device"},350);
 }
-function updateCounts(){
-  const text=$("chapterText").value;
-  $("wordCount").textContent=wordCount(text);
-  $("charCount").textContent=text.length;
-}
-function resizeTitle(){
-  $("chapterTitle").style.height="auto";
-  $("chapterTitle").style.height=$("chapterTitle").scrollHeight+"px";
-}
+function updateCounts(){const text=$("chapterText").value;$("wordCount").textContent=wordCount(text);$("charCount").textContent=text.length}
+function resizeTitle(){$("chapterTitle").style.height="auto";$("chapterTitle").style.height=$("chapterTitle").scrollHeight+"px"}
 function renderChapterOptions(){
-  const select=$("chapterSelect");
-  select.replaceChildren();
-
+  const select=$("chapterSelect");select.replaceChildren();
   project.chapters.forEach((chapter,index)=>{
-    const option=document.createElement("option");
-    option.value=chapter.id;
-    option.textContent=chapter.title||`Chapter ${index+1}`;
-    option.selected=chapter.id===project.activeChapterId;
-    select.append(option);
+    const option=document.createElement("option");option.value=chapter.id;
+    option.textContent=chapter.title||`Chapter ${index+1}`;option.selected=chapter.id===project.activeChapterId;select.append(option);
   });
 }
 function render(){
-  if(!project.chapters?.length){
-    project=makeProject(project.title);
-    projects.push(project);
-  }
-
-  const chapter=activeChapter();
-  project.activeChapterId=chapter.id;
+  if(!project.chapters?.length){project=makeProject(project.title);projects.push(project)}
+  const chapter=activeChapter();project.activeChapterId=chapter.id;
   $("novelTitle").value=project.title||"Untitled novel";
-  $("chapterTitle").value=chapter.title||"";
-  $("chapterText").value=chapter.text||"";
-  renderChapterOptions();
-  updateCounts();
-  resizeTitle();
-  setPage(currentPage);
-  saveProjects();
+  $("chapterTitle").value=chapter.title||"";$("chapterText").value=chapter.text||"";
+  renderChapterOptions();updateCounts();resizeTitle();setPage(currentPage);saveProjects();
 }
 $("novelTitle").addEventListener("input",scheduleSave);
-$("chapterTitle").addEventListener("input",()=>{
-  resizeTitle();
-  scheduleSave();
-});
-$("chapterText").addEventListener("input",()=>{
-  updateCounts();
-  scheduleSave();
-});
+$("chapterTitle").addEventListener("input",()=>{resizeTitle();scheduleSave()});
+$("chapterText").addEventListener("input",()=>{updateCounts();scheduleSave()});
 
 function setPage(page){
   currentPage=page;
-
-  const isWrite=page==="write";
-  const isProfile=page==="profile";
-  const isNovels=page==="novels";
-  const isPublished=page==="published";
-  const isSettings=page==="settings";
-
-  $("novelRow").classList.toggle("hidden",!isWrite);
-  $("chapterPicker").classList.toggle("hidden",!isWrite);
-  $("editorCard").classList.toggle("hidden",!isWrite);
+  const isWrite=page==="write",isProfile=page==="profile",isNovels=page==="novels",isPublished=page==="published",isSettings=page==="settings";
+  $("novelRow").classList.toggle("hidden",!isWrite);$("chapterPicker").classList.toggle("hidden",!isWrite);$("editorCard").classList.toggle("hidden",!isWrite);
   $("toolPanel").classList.toggle("hidden",isWrite||isProfile||isNovels||isPublished||isSettings);
-  $("profilePanel").classList.toggle("hidden",!isProfile&&!isNovels&&!isPublished);
-  $("settingsPanel").classList.toggle("hidden",!isSettings);
-
+  $("profilePanel").classList.toggle("hidden",!isProfile&&!isNovels&&!isPublished);$("settingsPanel").classList.toggle("hidden",!isSettings);
   if(!isWrite&&!isProfile&&!isNovels&&!isPublished&&!isSettings){
-    const [title,description]=toolInfo[page]||toolInfo.notes;
-    $("toolTitle").textContent=title;
-    $("toolDescription").textContent=description;
-    $("toolText").value=project[page]||"";
-    $("toolText").oninput=()=>{
-      project[page]=$("toolText").value;
-      saveProjects();
-      $("saveLabel").textContent="Saved on this device";
-    };
+    const[title,description]=toolInfo[page]||toolInfo.notes;
+    $("toolTitle").textContent=title;$("toolDescription").textContent=description;$("toolText").value=project[page]||"";
+    $("toolText").oninput=()=>{project[page]=$("toolText").value;saveProjects();$("saveLabel").textContent="Saved on this device"};
   }
-
-  document.querySelectorAll(".drawer-link[data-page]").forEach(button=>{
-    button.classList.toggle("active",button.dataset.page===page);
-  });
-
-  if(isProfile){
-    const user=account();
-    if(user)renderProfile(user,false);
-  }else if(isNovels){
-    renderNovelsScreen();
-  }else if(isPublished){
-    renderPublishedNovels();
-  }else if(isSettings){
-    renderSettings();
-  }
+  document.querySelectorAll(".drawer-link[data-page]").forEach(button=>button.classList.toggle("active",button.dataset.page===page));
+  if(isProfile){const user=account();if(user)renderProfile(user,false)}
+  else if(isNovels)renderNovelsScreen();
+  else if(isPublished)renderPublishedNovels();
+  else if(isSettings)renderSettings();
 }
 document.querySelectorAll(".drawer-link[data-page]").forEach(button=>{
-  button.onclick=()=>{
-    persistCurrent();
-    setPage(button.dataset.page);
-    closeDrawer();
-  };
+  button.onclick=()=>{persistCurrent();setPage(button.dataset.page);closeDrawer()};
 });
+$("chapterSelect").onchange=()=>{persistCurrent();project.activeChapterId=$("chapterSelect").value;saveProjects();render()};
 
-$("chapterSelect").onchange=()=>{
-  persistCurrent();
-  project.activeChapterId=$("chapterSelect").value;
-  saveProjects();
-  render();
-};
 function addChapter(){
   persistCurrent();
   const chapter={id:makeId(),title:`Chapter ${project.chapters.length+1}`,text:""};
-  project.chapters.push(chapter);
-  project.activeChapterId=chapter.id;
-  saveProjects();
-  currentPage="write";
-  render();
-  closeDrawer();
-  $("chapterTitle").focus();
-  toast("Chapter added.");
+  project.chapters.push(chapter);project.activeChapterId=chapter.id;saveProjects();currentPage="write";render();closeDrawer();$("chapterTitle").focus();toast("Chapter added.");
 }
-$("addChapterButton").onclick=addChapter;
-$("drawerNewChapter").onclick=addChapter;
-
+$("addChapterButton").onclick=addChapter;$("drawerNewChapter").onclick=addChapter;
 $("drawerNewNovel").onclick=()=>{
   const title=prompt("What would you like to call your new novel?");
   if(!title?.trim())return;
-  persistCurrent();
-  project=makeProject(title.trim());
-  projects.push(project);
-  saveProjects();
-  currentPage="write";
-  render();
-  closeDrawer();
-  toast("New novel created.");
+  persistCurrent();project=makeProject(title.trim());projects.push(project);saveProjects();currentPage="write";render();closeDrawer();toast("New novel created.");
 };
-
 $("drawerDeleteChapter").onclick=()=>{
-  if(project.chapters.length===1){
-    toast("Keep at least one chapter in your novel.");
-    return;
-  }
+  if(project.chapters.length===1){toast("Keep at least one chapter in your novel.");return}
   if(!confirm("Delete this chapter? This cannot be undone."))return;
-
   project.chapters=project.chapters.filter(chapter=>chapter.id!==project.activeChapterId);
-  project.activeChapterId=project.chapters[0].id;
-  saveProjects();
-  currentPage="write";
-  render();
-  closeDrawer();
-  toast("Chapter deleted.");
+  project.activeChapterId=project.chapters[0].id;saveProjects();currentPage="write";render();closeDrawer();toast("Chapter deleted.");
 };
-
-$("drawerExport").onclick=()=>{
+function exportNovel(){
   persistCurrent();
-
-  const text=project.title+"\n\n"+
-    project.chapters.map(chapter=>`${chapter.title}\n\n${chapter.text}`).join("\n\n\n");
+  const text=project.title+"\n\n"+project.chapters.map(chapter=>`${chapter.title}\n\n${chapter.text}`).join("\n\n\n");
   const url=URL.createObjectURL(new Blob([text],{type:"text/plain;charset=utf-8"}));
-  const link=document.createElement("a");
-  link.href=url;
+  const link=document.createElement("a");link.href=url;
   link.download=(project.title||"novel").replace(/[^\w-]+/g,"-").toLowerCase()+".txt";
-  link.click();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-  closeDrawer();
-  toast("Novel exported.");
-};
+  link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast("Novel exported.");
+}
+$("drawerExport").onclick=()=>{exportNovel();closeDrawer()};
 
 document.querySelectorAll("[data-mark]").forEach(button=>{
   button.onclick=()=>{
-    const editor=$("chapterText");
-    const start=editor.selectionStart,end=editor.selectionEnd;
-    if(start===end){
-      toast("Select text first.");
-      return;
-    }
-    const mark=button.dataset.mark;
-    const selected=editor.value.slice(start,end);
-    editor.setRangeText(mark+selected+mark,start,end,"select");
-    editor.focus();
-    updateCounts();
-    scheduleSave();
+    const editor=$("chapterText"),start=editor.selectionStart,end=editor.selectionEnd;
+    if(start===end){toast("Select text first.");return}
+    const mark=button.dataset.mark,selected=editor.value.slice(start,end);
+    editor.setRangeText(mark+selected+mark,start,end,"select");editor.focus();updateCounts();scheduleSave();
   };
-};
+});
 
-/* Publish dialog */
+/* Publishing prompt */
 function openPublishDialog(novel){
-  if(!canPublish(novel)){
-    toast("Publishing requires at least 3 chapters and 2,500 words.");
-    return;
-  }
-
-  publishingNovel=novel;
-  pendingCoverData=novel.coverImage||"";
-  $("publishForm").reset();
-  $("publishError").textContent="";
+  if(!canPublish(novel)){toast("Publishing requires at least 3 chapters and 2,500 words.");return}
+  publishingNovel=novel;pendingCoverData=novel.coverImage||"";
+  $("publishForm").reset();$("publishError").textContent="";
   $("publishTitle").value=novel.title==="My Novel"?"":(novel.title||"");
   $("publishShortDescription").value=novel.shortDescription||"";
   $("publishLongDescription").value=novel.longDescription||"";
   $("publishCover").value="";
-
-  const list=$("publishGenreList");
-  list.replaceChildren();
-  const selectedGenres=Array.isArray(novel.genres)?novel.genres:[];
-
+  const list=$("publishGenreList");list.replaceChildren();
+  const chosen=Array.isArray(novel.genres)?novel.genres:[];
   genres.forEach((genre,index)=>{
-    const label=document.createElement("label");
-    label.className="publish-genre-option";
-
-    const input=document.createElement("input");
-    input.type="checkbox";
-    input.name="publishGenre";
-    input.value=genre;
-    input.checked=selectedGenres.includes(genre);
-    input.id="publishGenre"+index;
-
-    const span=document.createElement("span");
-    span.textContent=genre;
-
-    label.append(input,span);
-    list.append(label);
+    const label=document.createElement("label");label.className="publish-genre-option";
+    const input=document.createElement("input");input.type="checkbox";input.name="publishGenre";input.value=genre;input.checked=chosen.includes(genre);input.id="publishGenre"+index;
+    const span=document.createElement("span");span.textContent=genre;label.append(input,span);list.append(label);
   });
-
-  updatePublishCoverPreview();
-  $("removePublishCover").classList.toggle("hidden",!pendingCoverData);
-  $("publishDialogBackdrop").classList.remove("hidden");
-  $("publishTitle").focus();
+  updatePublishCoverPreview();$("removePublishCover").classList.toggle("hidden",!pendingCoverData);
+  $("publishDialogBackdrop").classList.remove("hidden");$("publishTitle").focus();
 }
-function closePublishDialog(){
-  $("publishDialogBackdrop").classList.add("hidden");
-  publishingNovel=null;
-  pendingCoverData="";
-}
+function closePublishDialog(){$("publishDialogBackdrop").classList.add("hidden");publishingNovel=null;pendingCoverData=""}
 function updatePublishCoverPreview(){
-  const preview=$("publishCoverPreview");
-  preview.replaceChildren();
-
+  const preview=$("publishCoverPreview");preview.replaceChildren();
   if(pendingCoverData){
-    const image=document.createElement("img");
-    image.src=pendingCoverData;
-    image.alt="Selected novel cover preview";
-    preview.append(image);
+    const image=document.createElement("img");image.src=pendingCoverData;image.alt="Selected novel cover preview";preview.append(image);
   }else{
-    preview.textContent=$("publishTitle").value.trim()||"Cover preview";
-    preview.style.backgroundImage="";
+    preview.textContent=$("publishTitle").value.trim()||"Cover preview";preview.style.backgroundImage="";
   }
 }
 $("publishTitle").addEventListener("input",updatePublishCoverPreview);
-
 $("publishCover").addEventListener("change",()=>{
-  const file=$("publishCover").files?.[0];
-  if(!file)return;
-
-  if(!file.type.startsWith("image/")){
-    $("publishError").textContent="Please select an image file.";
-    $("publishCover").value="";
-    return;
-  }
-
+  const file=$("publishCover").files?.[0];if(!file)return;
+  if(!file.type.startsWith("image/")){$("publishError").textContent="Please select an image file."; $("publishCover").value="";return}
   const reader=new FileReader();
   reader.onload=()=>{
     const source=new Image();
     source.onload=()=>{
-      const limit=700;
-      const scale=Math.min(1,limit/Math.max(source.width,source.height));
-      const canvas=document.createElement("canvas");
-      canvas.width=Math.max(1,Math.round(source.width*scale));
-      canvas.height=Math.max(1,Math.round(source.height*scale));
-
-      const context=canvas.getContext("2d");
-      context.drawImage(source,0,0,canvas.width,canvas.height);
-      pendingCoverData=canvas.toDataURL("image/jpeg",0.78);
-      $("publishError").textContent="";
-      $("removePublishCover").classList.remove("hidden");
-      updatePublishCoverPreview();
+      const limit=700,scale=Math.min(1,limit/Math.max(source.width,source.height));
+      const canvas=document.createElement("canvas");canvas.width=Math.max(1,Math.round(source.width*scale));canvas.height=Math.max(1,Math.round(source.height*scale));
+      canvas.getContext("2d").drawImage(source,0,0,canvas.width,canvas.height);
+      pendingCoverData=canvas.toDataURL("image/jpeg",0.78);$("publishError").textContent="";
+      $("removePublishCover").classList.remove("hidden");updatePublishCoverPreview();
     };
     source.onerror=()=>{$("publishError").textContent="Could not read that image. Try another one."};
     source.src=reader.result;
@@ -872,308 +574,108 @@ $("publishCover").addEventListener("change",()=>{
   reader.onerror=()=>{$("publishError").textContent="Could not load that image. Try another one."};
   reader.readAsDataURL(file);
 });
-
-$("removePublishCover").onclick=()=>{
-  pendingCoverData="";
-  $("publishCover").value="";
-  $("removePublishCover").classList.add("hidden");
-  updatePublishCoverPreview();
-};
+$("removePublishCover").onclick=()=>{pendingCoverData="";$("publishCover").value="";$("removePublishCover").classList.add("hidden");updatePublishCoverPreview()};
 $("cancelPublish").onclick=closePublishDialog;
-$("publishDialogBackdrop").addEventListener("click",event=>{
-  if(event.target===$("publishDialogBackdrop"))closePublishDialog();
-});
-
+$("publishDialogBackdrop").addEventListener("click",event=>{if(event.target===$("publishDialogBackdrop"))closePublishDialog()});
 $("publishForm").addEventListener("submit",event=>{
-  event.preventDefault();
-  if(!publishingNovel)return;
-
+  event.preventDefault();if(!publishingNovel)return;
   const title=$("publishTitle").value.trim();
   const shortDescription=$("publishShortDescription").value.trim();
   const longDescription=$("publishLongDescription").value.trim();
-  const selected=[...document.querySelectorAll('input[name="publishGenre"]:checked')]
-    .map(input=>input.value);
-
+  const selected=[...document.querySelectorAll('input[name="publishGenre"]:checked')].map(input=>input.value);
   if(!title){$("publishError").textContent="Enter a title for your novel.";return}
   if(!shortDescription){$("publishError").textContent="Add a short description.";return}
   if(!longDescription){$("publishError").textContent="Add a long description.";return}
   if(!selected.length){$("publishError").textContent="Choose at least one genre.";return}
-
-  publishingNovel.title=title;
-  publishingNovel.shortDescription=shortDescription;
-  publishingNovel.longDescription=longDescription;
-  publishingNovel.genres=selected;
-  publishingNovel.genre=selected.join(", ");
-  publishingNovel.coverImage=pendingCoverData;
-  publishingNovel.status="published";
-  publishingNovel.publishedAt=publishingNovel.publishedAt||new Date().toISOString();
-
-  saveProjects();
-  closePublishDialog();
-  toast("Novel published.");
-
-  if(currentPage==="published")renderPublishedNovels();
-  else if(currentPage==="novels")renderNovelsScreen();
-  else if(currentPage==="profile")renderProfile(account(),false);
+  publishingNovel.title=title;publishingNovel.shortDescription=shortDescription;publishingNovel.longDescription=longDescription;
+  publishingNovel.genres=selected;publishingNovel.genre=selected.join(", ");publishingNovel.coverImage=pendingCoverData;
+  publishingNovel.status="published";publishingNovel.publishedAt=publishingNovel.publishedAt||new Date().toISOString();
+  saveProjects();closePublishDialog();toast("Novel published.");
+  if(currentPage==="published")renderPublishedNovels();else if(currentPage==="novels")renderNovelsScreen();else if(currentPage==="profile")renderProfile(account(),false);
 });
 
-/* Novel cards and lists */
+/* Novel cards and profile */
 function deleteNovel(novel){
-  const title=novel.title||"Untitled novel";
-  if(!confirm(`Delete "${title}" and all its chapters? This cannot be undone.`))return;
-
-  const wasActive=project.id===novel.id;
-  projects=projects.filter(item=>item.id!==novel.id);
-
-  if(!projects.length){
-    project=makeProject();
-    projects.push(project);
-  }else if(wasActive){
-    project=projects[0];
-  }
-
+  if(!confirm(`Delete "${novel.title||"Untitled novel"}" and all its chapters? This cannot be undone.`))return;
+  const wasActive=project.id===novel.id;projects=projects.filter(item=>item.id!==novel.id);
+  if(!projects.length){project=makeProject();projects.push(project)}else if(wasActive)project=projects[0];
   saveProjects();
-
-  if(currentPage==="published")renderPublishedNovels();
-  else if(currentPage==="novels")renderNovelsScreen();
-  else if(currentPage==="profile")renderProfile(account(),false);
-  else render();
-
+  if(currentPage==="published")renderPublishedNovels();else if(currentPage==="novels")renderNovelsScreen();else if(currentPage==="profile")renderProfile(account(),false);else render();
   toast("Novel deleted.");
 }
-
 function createNovelCard(novel,index){
-  const card=document.createElement("article");
-  card.className="profile-book";
-
-  const cover=document.createElement("div");
-  cover.className="profile-book-cover";
-
-  if(novel.coverImage){
-    const image=document.createElement("img");
-    image.src=novel.coverImage;
-    image.alt=`Cover for ${novel.title||"Untitled novel"}`;
-    cover.append(image);
-  }else{
-    cover.classList.add("cover-"+(index%6));
-    cover.textContent=novel.title||"Untitled novel";
-  }
-
-  const title=document.createElement("div");
-  title.className="profile-book-title";
-  title.textContent=novel.title||"Untitled novel";
-
-  const genreNames=Array.isArray(novel.genres)&&novel.genres.length
-    ?novel.genres
-    :(novel.genre?[novel.genre]:[]);
-
-  const meta=document.createElement("div");
-  meta.className="profile-book-meta";
+  const card=document.createElement("article");card.className="profile-book";
+  const cover=document.createElement("div");cover.className="profile-book-cover";
+  if(novel.coverImage){const img=document.createElement("img");img.src=novel.coverImage;img.alt=`Cover for ${novel.title||"Untitled novel"}`;cover.append(img)}
+  else{cover.classList.add("cover-"+index%6);cover.textContent=novel.title||"Untitled novel"}
+  const title=document.createElement("div");title.className="profile-book-title";title.textContent=novel.title||"Untitled novel";
+  const genreNames=Array.isArray(novel.genres)&&novel.genres.length?novel.genres:(novel.genre?[novel.genre]:[]);
+  const meta=document.createElement("div");meta.className="profile-book-meta";
   meta.textContent=`${genreNames.join(", ")||"Novel"} · ${novel.chapters.length} chapter${novel.chapters.length===1?"":"s"} · ${novelWords(novel).toLocaleString()} words`;
-
   card.append(cover,title,meta);
-
-  if(novel.shortDescription){
-    const description=document.createElement("div");
-    description.className="profile-book-description";
-    description.textContent=novel.shortDescription;
-    card.append(description);
-  }
-
+  if(novel.shortDescription){const description=document.createElement("div");description.className="profile-book-description";description.textContent=novel.shortDescription;card.append(description)}
   if(genreNames.length){
-    const pills=document.createElement("div");
-    pills.className="profile-book-genres";
-    genreNames.forEach(genre=>{
-      const pill=document.createElement("span");
-      pill.className="genre-pill";
-      pill.textContent=genre;
-      pills.append(pill);
-    });
+    const pills=document.createElement("div");pills.className="profile-book-genres";
+    genreNames.forEach(genre=>{const pill=document.createElement("span");pill.className="genre-pill";pill.textContent=genre;pills.append(pill)});
     card.append(pills);
   }
-
-  if(novel.status==="published"){
-    const badge=document.createElement("span");
-    badge.className="publish-status";
-    badge.textContent="Published";
-    card.append(badge);
-  }
-
-  const actions=document.createElement("div");
-  actions.className="novel-card-actions";
-
-  const publish=document.createElement("button");
-  publish.type="button";
-  publish.className="publish-button";
+  if(novel.status==="published"){const badge=document.createElement("span");badge.className="publish-status";badge.textContent="Published";card.append(badge)}
+  const actions=document.createElement("div");actions.className="novel-card-actions";
+  const publish=document.createElement("button");publish.type="button";publish.className="publish-button";
   publish.textContent=novel.status==="published"?"Published":"Publish";
   publish.disabled=novel.status==="published"||!canPublish(novel);
   publish.title=canPublish(novel)?"Publish this novel":"Requires 3 chapters and 2,500 words";
-  publish.onclick=()=>openPublishDialog(novel);
-  actions.append(publish);
-
-  const open=document.createElement("button");
-  open.type="button";
-  open.className="button";
-  open.textContent="Open";
-  open.onclick=()=>{
-    persistCurrent();
-    project=novel;
-    saveProjects();
-    currentPage="write";
-    render();
-    window.scrollTo({top:0,behavior:"smooth"});
-  };
+  publish.onclick=()=>openPublishDialog(novel);actions.append(publish);
+  const open=document.createElement("button");open.type="button";open.className="button";open.textContent="Open";
+  open.onclick=()=>{persistCurrent();project=novel;saveProjects();currentPage="write";render();window.scrollTo({top:0,behavior:"smooth"})};
   actions.append(open);
-
-  const remove=document.createElement("button");
-  remove.type="button";
-  remove.className="delete-button";
-  remove.textContent="Delete";
-  remove.setAttribute("aria-label","Delete "+(novel.title||"Untitled novel"));
-  remove.onclick=()=>deleteNovel(novel);
-  actions.append(remove);
-
+  const remove=document.createElement("button");remove.type="button";remove.className="delete-button";remove.textContent="Delete";
+  remove.setAttribute("aria-label","Delete "+(novel.title||"Untitled novel"));remove.onclick=()=>deleteNovel(novel);actions.append(remove);
   card.append(actions);
-
   if(novel.status!=="published"){
-    const requirements=document.createElement("div");
-    requirements.className="publish-requirements";
-
-    const chaptersNeeded=Math.max(0,3-novel.chapters.length);
-    const wordsNeeded=Math.max(0,2500-novelWords(novel));
-
-    requirements.textContent=canPublish(novel)
-      ?"Ready to publish."
-      :`Need ${chaptersNeeded} more chapter${chaptersNeeded===1?"":"s"} and ${wordsNeeded.toLocaleString()} more words to publish.`;
-
+    const requirements=document.createElement("div");requirements.className="publish-requirements";
+    const chaptersNeeded=Math.max(0,3-novel.chapters.length),wordsNeeded=Math.max(0,2500-novelWords(novel));
+    requirements.textContent=canPublish(novel)?"Ready to publish.":`Need ${chaptersNeeded} more chapter${chaptersNeeded===1?"":"s"} and ${wordsNeeded.toLocaleString()} more words to publish.`;
     card.append(requirements);
   }
-
   return card;
 }
-
 function renderProfileNovels(container){
-  const section=document.createElement("section");
-  section.className="profile-section";
-
-  const heading=document.createElement("h3");
-  heading.textContent="My novels";
-  section.append(heading);
-
-  if(!projects.length){
-    const empty=document.createElement("div");
-    empty.className="profile-empty";
-    empty.textContent="No novels yet. Create a novel to get started.";
-    section.append(empty);
-  }else{
-    const books=document.createElement("div");
-    books.className="profile-books";
-    projects.forEach((novel,index)=>books.append(createNovelCard(novel,index)));
-    section.append(books);
-  }
+  const section=document.createElement("section");section.className="profile-section";
+  const heading=document.createElement("h3");heading.textContent="My novels";section.append(heading);
+  if(!projects.length){const empty=document.createElement("div");empty.className="profile-empty";empty.textContent="No novels yet. Create a novel to get started.";section.append(empty)}
+  else{const books=document.createElement("div");books.className="profile-books";projects.forEach((novel,index)=>books.append(createNovelCard(novel,index)));section.append(books)}
   container.append(section);
 }
-
-function showProfile(){
-  persistCurrent();
-  setPage("profile");
-}
-
+function showProfile(){persistCurrent();setPage("profile")}
 function renderProfile(user,editing){
-  const panel=$("profilePanel");
-  panel.replaceChildren();
-
+  const panel=$("profilePanel");panel.replaceChildren();
   if(Number(user.age)>=13&&Number(user.age)<=17){
-    const notice=document.createElement("div");
-    notice.className="readonly-note";
-    notice.textContent="Your profile is private because this account belongs to someone aged 13–17. Only you can see it.";
-    panel.append(notice);
+    const notice=document.createElement("div");notice.className="readonly-note";
+    notice.textContent="Your profile is private because this account belongs to someone aged 13–17. Only you can see it.";panel.append(notice);
   }
-
-  const hero=document.createElement("div");
-  hero.className="profile-hero";
-  hero.style.setProperty("--profile-color",user.profileColor||PROFILE_COLORS[0]);
-
-  const avatar=document.createElement("div");
-  avatar.className="profile-avatar";
-  avatar.textContent=(user.penName||user.fullName||"W").trim().charAt(0).toUpperCase();
-
-  const intro=document.createElement("div");
-  const name=document.createElement("h2");
-  name.textContent=user.penName||"Writer";
-
-  const tagline=document.createElement("p");
-  tagline.textContent=user.writingAbout||"NovelPea writer";
-  intro.append(name,tagline);
-  hero.append(avatar,intro);
-  panel.append(hero);
-
-  if(user.bio){
-    const bio=document.createElement("p");
-    bio.className="profile-bio";
-    bio.textContent=user.bio;
-    panel.append(bio);
-  }
-
-  const details=document.createElement("div");
-  details.className="profile-details";
-
-  if(user.location){
-    const item=document.createElement("span");
-    item.className="profile-detail";
-    item.textContent="⌖ "+user.location;
-    details.append(item);
-  }
-  if(user.birthplace){
-    const item=document.createElement("span");
-    item.className="profile-detail";
-    item.textContent="Born in "+user.birthplace;
-    details.append(item);
-  }
+  const hero=document.createElement("div");hero.className="profile-hero";hero.style.setProperty("--profile-color",user.profileColor||PROFILE_COLORS[0]);
+  const avatar=document.createElement("div");avatar.className="profile-avatar";avatar.textContent=(user.penName||user.fullName||"W").trim().charAt(0).toUpperCase();
+  const intro=document.createElement("div"),name=document.createElement("h2"),tagline=document.createElement("p");
+  name.textContent=user.penName||"Writer";tagline.textContent=user.writingAbout||"NovelPea writer";intro.append(name,tagline);hero.append(avatar,intro);panel.append(hero);
+  if(user.bio){const bio=document.createElement("p");bio.className="profile-bio";bio.textContent=user.bio;panel.append(bio)}
+  const details=document.createElement("div");details.className="profile-details";
+  if(user.location){const item=document.createElement("span");item.className="profile-detail";item.textContent="⌖ "+user.location;details.append(item)}
+  if(user.birthplace){const item=document.createElement("span");item.className="profile-detail";item.textContent="Born in "+user.birthplace;details.append(item)}
   if(user.website){
-    const link=document.createElement("a");
-    link.className="profile-detail";
-    link.textContent="↗ Website";
-    let url=user.website.trim();
-    if(url&&!/^https?:\/\//i.test(url))url="https://"+url;
-    link.href=url;
-    link.target="_blank";
-    link.rel="noopener noreferrer";
-    details.append(link);
+    const link=document.createElement("a");link.className="profile-detail";link.textContent="↗ Website";
+    let url=user.website.trim();if(url&&!/^https?:\/\//i.test(url))url="https://"+url;
+    link.href=url;link.target="_blank";link.rel="noopener noreferrer";details.append(link);
   }
   if(details.children.length)panel.append(details);
-
-  const profileActions=document.createElement("div");
-  profileActions.className="actions";
-
-  const novelsButton=document.createElement("button");
-  novelsButton.type="button";
-  novelsButton.className="button";
-  novelsButton.textContent="View my novels";
-  novelsButton.onclick=()=>setPage("novels");
-  profileActions.append(novelsButton);
-
-  const publishedButton=document.createElement("button");
-  publishedButton.type="button";
-  publishedButton.className="button";
-  publishedButton.textContent="Published novels";
-  publishedButton.onclick=()=>setPage("published");
-  profileActions.append(publishedButton);
-
-  if(!editing){
-    const edit=document.createElement("button");
-    edit.type="button";
-    edit.className="button primary";
-    edit.textContent="Customize profile";
-    edit.onclick=()=>renderProfile(user,true);
-    profileActions.append(edit);
-  }
-  panel.append(profileActions);
-  renderProfileNovels(panel);
+  const profileActions=document.createElement("div");profileActions.className="actions";
+  const novelsButton=document.createElement("button");novelsButton.type="button";novelsButton.className="button";novelsButton.textContent="View my novels";novelsButton.onclick=()=>setPage("novels");profileActions.append(novelsButton);
+  const publishedButton=document.createElement("button");publishedButton.type="button";publishedButton.className="button";publishedButton.textContent="Published novels";publishedButton.onclick=()=>setPage("published");profileActions.append(publishedButton);
+  if(!editing){const edit=document.createElement("button");edit.type="button";edit.className="button primary";edit.textContent="Customize profile";edit.onclick=()=>renderProfile(user,true);profileActions.append(edit)}
+  panel.append(profileActions);renderProfileNovels(panel);
 
   if(editing){
-    const form=document.createElement("form");
-    form.className="profile-form";
+    const form=document.createElement("form");form.className="profile-form";
     form.innerHTML=`
       <h2>Customize your profile</h2>
       <div class="field"><label for="editFullName">Full name</label><input id="editFullName" maxlength="100" required></div>
@@ -1184,361 +686,120 @@ function renderProfile(user,editing){
       <div class="field"><label for="editWritingAbout">About my writing</label><input id="editWritingAbout" maxlength="100" placeholder="Fantasy writer, aspiring novelist…"></div>
       <div class="field"><label>Profile color</label><div class="profile-colors" id="profileColors"></div></div>
       <p class="form-error" id="profileError"></p>
-      <div class="actions">
-        <button class="secondary-button" id="cancelProfile" type="button">Cancel</button>
-        <button class="primary-button" type="submit">Save profile</button>
-      </div>`;
-
+      <div class="actions"><button class="secondary-button" id="cancelProfile" type="button">Cancel</button><button class="primary-button" type="submit">Save profile</button></div>`;
     panel.append(form);
-    $("editFullName").value=user.fullName||"";
-    $("editBio").value=user.bio||"";
-    $("editBirthplace").value=user.birthplace||"";
-    $("editLocation").value=user.location||"";
-    $("editWebsite").value=user.website||"";
-    $("editWritingAbout").value=user.writingAbout||"";
-
-    let selectedColor=user.profileColor||PROFILE_COLORS[0];
-    const colorList=$("profileColors");
-
+    $("editFullName").value=user.fullName||"";$("editBio").value=user.bio||"";$("editBirthplace").value=user.birthplace||"";
+    $("editLocation").value=user.location||"";$("editWebsite").value=user.website||"";$("editWritingAbout").value=user.writingAbout||"";
+    let selectedColor=user.profileColor||PROFILE_COLORS[0];const colorList=$("profileColors");
     PROFILE_COLORS.forEach(color=>{
-      const button=document.createElement("button");
-      button.type="button";
-      button.className="profile-color"+(color===selectedColor?" selected":"");
-      button.style.background=color;
-      button.setAttribute("aria-label","Choose profile color "+color);
-      button.onclick=()=>{
-        selectedColor=color;
-        colorList.querySelectorAll("button").forEach(item=>item.classList.remove("selected"));
-        button.classList.add("selected");
-        hero.style.setProperty("--profile-color",color);
-      };
+      const button=document.createElement("button");button.type="button";button.className="profile-color"+(color===selectedColor?" selected":"");
+      button.style.background=color;button.setAttribute("aria-label","Choose profile color "+color);
+      button.onclick=()=>{selectedColor=color;colorList.querySelectorAll("button").forEach(item=>item.classList.remove("selected"));button.classList.add("selected");hero.style.setProperty("--profile-color",color)};
       colorList.append(button);
     });
-
     $("cancelProfile").onclick=()=>renderProfile(user,false);
     form.onsubmit=event=>{
-      event.preventDefault();
-      user.fullName=$("editFullName").value.trim();
-      user.bio=$("editBio").value.trim();
-      user.birthplace=$("editBirthplace").value.trim();
-      user.location=$("editLocation").value.trim();
-      user.website=$("editWebsite").value.trim();
-      user.writingAbout=$("editWritingAbout").value.trim();
-      user.profileColor=selectedColor;
-      saveAccount(user);
-      updateDrawerUser(user);
-      toast("Profile saved.");
-      renderProfile(user,false);
+      event.preventDefault();user.fullName=$("editFullName").value.trim();user.bio=$("editBio").value.trim();
+      user.birthplace=$("editBirthplace").value.trim();user.location=$("editLocation").value.trim();
+      user.website=$("editWebsite").value.trim();user.writingAbout=$("editWritingAbout").value.trim();
+      user.profileColor=selectedColor;saveAccount(user);updateDrawerUser(user);toast("Profile saved.");renderProfile(user,false);
     };
   }
 }
-
 function renderNovelListScreen(titleText,subtitleText,list){
-  const panel=$("profilePanel");
-  panel.replaceChildren();
-
-  const back=document.createElement("button");
-  back.type="button";
-  back.className="button novel-screen-back";
-  back.textContent="← Back to profile";
-  back.onclick=()=>setPage("profile");
+  const panel=$("profilePanel");panel.replaceChildren();
+  const back=document.createElement("button");back.type="button";back.className="button novel-screen-back";back.textContent="← Back to profile";back.onclick=()=>setPage("profile");
   panel.append(back);
-
-  const heading=document.createElement("div");
-  heading.className="novel-screen-header";
-
-  const title=document.createElement("h2");
-  title.textContent=titleText;
-
-  const subtitle=document.createElement("p");
-  subtitle.textContent=subtitleText;
-  heading.append(title,subtitle);
-  panel.append(heading);
-
-  if(!list.length){
-    const empty=document.createElement("div");
-    empty.className="profile-empty";
-    empty.textContent=titleText==="Published novels"
-      ?"No published novels yet. Publish a novel and it will appear here."
-      :"No novels yet. Create a novel from the menu to get started.";
-    panel.append(empty);
-    return;
-  }
-
-  const books=document.createElement("div");
-  books.className="profile-books";
-  list.forEach((novel,index)=>books.append(createNovelCard(novel,index)));
-  panel.append(books);
+  const heading=document.createElement("div");heading.className="novel-screen-header";
+  const title=document.createElement("h2");title.textContent=titleText;
+  const subtitle=document.createElement("p");subtitle.textContent=subtitleText;heading.append(title,subtitle);panel.append(heading);
+  if(!list.length){const empty=document.createElement("div");empty.className="profile-empty";empty.textContent=titleText==="Published novels"?"No published novels yet. Publish a novel and it will appear here.":"No novels yet. Create a novel from the menu to get started.";panel.append(empty);return}
+  const books=document.createElement("div");books.className="profile-books";list.forEach((novel,index)=>books.append(createNovelCard(novel,index)));panel.append(books);
 }
-function renderNovelsScreen(){
-  renderNovelListScreen("My novels","Your drafts and published stories.",projects);
-}
-function renderPublishedNovels(){
-  renderNovelListScreen(
-    "Published novels",
-    "Stories you’ve published.",
-    projects.filter(novel=>novel.status==="published")
-  );
-}
-$("drawerProfile").onclick=()=>{
-  showProfile();
-  closeDrawer();
-};
+function renderNovelsScreen(){renderNovelListScreen("My novels","Your drafts and published stories.",projects)}
+function renderPublishedNovels(){renderNovelListScreen("Published novels","Stories you’ve published.",projects.filter(novel=>novel.status==="published"))}
+$("drawerProfile").onclick=()=>{showProfile();closeDrawer()};
 
-/* Settings and account deletion */
+/* More settings */
 function renderSettings(){
-  const panel=$("settingsPanel");
-  panel.replaceChildren();
-
-  const back=document.createElement("button");
-  back.type="button";
-  back.className="button novel-screen-back";
-  back.textContent="← Back to profile";
-  back.onclick=()=>setPage("profile");
-
-  const heading=document.createElement("h2");
-  heading.textContent="Settings";
-
-  const description=document.createElement("p");
-  description.textContent="Manage your NovelPea account and saved data.";
-
-  const themeButton=document.createElement("button");
-  themeButton.type="button";
-  themeButton.className="secondary-button";
-  themeButton.textContent=document.body.classList.contains("dark")
-    ?"Switch to light mode":"Switch to dark mode";
-  themeButton.onclick=()=>{
-    setTheme(!document.body.classList.contains("dark"));
-    renderSettings();
-  };
-
-  const exportButton=document.createElement("button");
-  exportButton.type="button";
-  exportButton.className="secondary-button";
-  exportButton.textContent="Export active novel";
-  exportButton.onclick=exportNovel;
-
-  const dataNotice=document.createElement("div");
-  dataNotice.className="readonly-note";
-  dataNotice.textContent="Your account and novels are stored in this browser on this device. Clearing browser data may erase them.";
-
-  const danger=document.createElement("section");
-  danger.className="settings-danger";
-
-  const dangerHeading=document.createElement("h3");
-  dangerHeading.textContent="Delete account";
-
-  const warning=document.createElement("p");
-  warning.textContent="This permanently deletes your account and all novels saved in this browser. This action cannot be undone.";
-
-  const deleteButton=document.createElement("button");
-  deleteButton.type="button";
-  deleteButton.className="settings-delete";
-  deleteButton.textContent="Delete my account";
-  deleteButton.onclick=deleteAccount;
-
-  danger.append(dangerHeading,warning,deleteButton);
-  panel.append(back,heading,description,themeButton,exportButton,dataNotice,danger);
-}
-function exportNovel(){
-  persistCurrent();
-  const text=project.title+"\n\n"+
-    project.chapters.map(chapter=>`${chapter.title}\n\n${chapter.text}`).join("\n\n\n");
-  const url=URL.createObjectURL(new Blob([text],{type:"text/plain;charset=utf-8"}));
-  const link=document.createElement("a");
-  link.href=url;
-  link.download=(project.title||"novel").replace(/[^\w-]+/g,"-").toLowerCase()+".txt";
-  link.click();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-  toast("Novel exported.");
+  const panel=$("settingsPanel");panel.replaceChildren();
+  const back=document.createElement("button");back.type="button";back.className="button novel-screen-back";back.textContent="← Back to profile";back.onclick=()=>setPage("profile");
+  const heading=document.createElement("h2");heading.textContent="Settings";
+  const description=document.createElement("p");description.textContent="Manage your NovelPea account and saved data.";
+  const themeButton=document.createElement("button");themeButton.type="button";themeButton.className="secondary-button";
+  themeButton.textContent=document.body.classList.contains("dark")?"Switch to light mode":"Switch to dark mode";
+  themeButton.onclick=()=>{setTheme(!document.body.classList.contains("dark"));renderSettings()};
+  const exportButton=document.createElement("button");exportButton.type="button";exportButton.className="secondary-button";exportButton.textContent="Export active novel";exportButton.onclick=exportNovel;
+  const dataNotice=document.createElement("div");dataNotice.className="readonly-note";dataNotice.textContent="Your account and novels are stored in this browser on this device. Clearing browser data may erase them.";
+  const danger=document.createElement("section");danger.className="settings-danger";
+  const dangerHeading=document.createElement("h3");dangerHeading.textContent="Delete account";
+  const warning=document.createElement("p");warning.textContent="This permanently deletes your account and all novels saved in this browser. This action cannot be undone.";
+  const deleteButton=document.createElement("button");deleteButton.type="button";deleteButton.className="settings-delete";deleteButton.textContent="Delete my account";deleteButton.onclick=deleteAccount;
+  danger.append(dangerHeading,warning,deleteButton);panel.append(back,heading,description,themeButton,exportButton,dataNotice,danger);
 }
 function deleteAccount(){
   if(!confirm("Permanently delete your account and all NovelPea novels saved in this browser? This cannot be undone."))return;
-
-  localStorage.removeItem(ACCOUNT_KEY);
-  localStorage.removeItem(SESSION_KEY);
-  localStorage.removeItem(PROJECT_KEY);
-  localStorage.removeItem(PROJECT_KEY+"-active");
-
-  projects=[];
-  project=makeProject();
-  projects.push(project);
-  currentPage="write";
-
-  $("app").classList.add("hidden");
-  $("authScreen").classList.remove("hidden");
-  $("onboarding").classList.add("hidden");
-  $("loginForm").reset();
-  $("signupForm").reset();
-  $("loginError").textContent="";
-  $("signupError").textContent="";
-  closeDrawer();
-  setAuthMode(true);
+  localStorage.removeItem(ACCOUNT_KEY);localStorage.removeItem(SESSION_KEY);localStorage.removeItem(PROJECT_KEY);localStorage.removeItem(PROJECT_KEY+"-active");
+  projects=[];project=makeProject();projects.push(project);currentPage="write";
+  $("app").classList.add("hidden");$("authScreen").classList.remove("hidden");$("onboarding").classList.add("hidden");
+  $("loginForm").reset();$("signupForm").reset();$("loginError").textContent="";$("signupError").textContent="";closeDrawer();setAuthMode(true);
   toast("Your account and saved novels were deleted.");
 }
-$("drawerSettings").onclick=()=>{
-  persistCurrent();
-  setPage("settings");
-  closeDrawer();
-};
+$("drawerSettings").onclick=()=>{persistCurrent();setPage("settings");closeDrawer()};
 
-/* Onboarding and genre preferences */
+/* Onboarding */
 const tutorialSteps=[
   ["Welcome to NovelPea","This is your writing space. We’ll take a quick tour, and you can skip it whenever you like.","Your work is saved in this browser on this device."],
   ["Write your manuscript","Type in the large editor. Tap the chapter title to rename it. Your writing saves automatically.","Use the chapter picker to switch chapters, or tap ＋ Chapter to add one."],
   ["Plan your story","Open the menu to find Story Bible, Characters, Places, and Notes. Each section saves with your novel.","The formatting buttons work on text you select in the editor."],
   ["Manage your novels","View your drafts and published stories on your profile. Publishing requires at least 3 chapters and 2,500 words.","This demo saves your novels in this browser."]
 ];
-
-function startTutorial(){
-  tutorialStep=0;
-  $("onboarding").classList.remove("hidden");
-  renderTutorial();
-}
+function startTutorial(){tutorialStep=0;$("onboarding").classList.remove("hidden");renderTutorial()}
 function renderTutorial(){
-  const [title,text,tip]=tutorialSteps[tutorialStep];
-  $("onboardingCount").textContent=`Step ${tutorialStep+1} of ${tutorialSteps.length}`;
-
-  const content=$("onboardingContent");
-  content.replaceChildren();
-
-  const h=document.createElement("h2");
-  h.id="onboardingTitle";
-  h.textContent=title;
-
-  const p=document.createElement("p");
-  p.textContent=text;
-
-  const t=document.createElement("div");
-  t.className="tutorial-tip";
-  t.textContent=tip;
-
-  content.append(h,p,t);
-
-  const actions=$("onboardingActions");
-  actions.replaceChildren();
-
-  const skip=document.createElement("button");
-  skip.className="skip-button";
-  skip.type="button";
-  skip.textContent="Skip tutorial";
-  skip.onclick=showGenres;
-  actions.append(skip);
-
-  const group=document.createElement("div");
-  group.className="action-group";
-
-  if(tutorialStep>0){
-    const back=document.createElement("button");
-    back.className="secondary-button";
-    back.type="button";
-    back.textContent="Back";
-    back.onclick=()=>{
-      tutorialStep--;
-      renderTutorial();
-    };
-    group.append(back);
-  }
-
-  const next=document.createElement("button");
-  next.className="primary-button";
-  next.type="button";
+  const[title,text,tip]=tutorialSteps[tutorialStep];$("onboardingCount").textContent=`Step ${tutorialStep+1} of ${tutorialSteps.length}`;
+  const content=$("onboardingContent");content.replaceChildren();
+  const h=document.createElement("h2");h.id="onboardingTitle";h.textContent=title;
+  const p=document.createElement("p");p.textContent=text;
+  const t=document.createElement("div");t.className="tutorial-tip";t.textContent=tip;content.append(h,p,t);
+  const actions=$("onboardingActions");actions.replaceChildren();
+  const skip=document.createElement("button");skip.className="skip-button";skip.type="button";skip.textContent="Skip tutorial";skip.onclick=showGenres;actions.append(skip);
+  const group=document.createElement("div");group.className="action-group";
+  if(tutorialStep>0){const back=document.createElement("button");back.className="secondary-button";back.type="button";back.textContent="Back";back.onclick=()=>{tutorialStep--;renderTutorial()};group.append(back)}
+  const next=document.createElement("button");next.className="primary-button";next.type="button";
   next.textContent=tutorialStep===tutorialSteps.length-1?"Choose genres":"Next";
-  next.onclick=()=>{
-    if(tutorialStep<tutorialSteps.length-1){
-      tutorialStep++;
-      renderTutorial();
-    }else{
-      showGenres();
-    }
-  };
-  group.append(next);
-  actions.append(group);
+  next.onclick=()=>{if(tutorialStep<tutorialSteps.length-1){tutorialStep++;renderTutorial()}else showGenres()};
+  group.append(next);actions.append(group);
 }
 function showGenres(){
   $("onboardingCount").textContent="Your writing interests";
-
-  const content=$("onboardingContent");
-  content.replaceChildren();
-
-  const h=document.createElement("h2");
-  h.id="onboardingTitle";
-  h.textContent="What genres do you enjoy?";
-
-  const p=document.createElement("p");
-  p.textContent="Choose any genres you’re interested in writing or reading.";
-
-  const grid=document.createElement("div");
-  grid.className="genre-grid";
-
-  const user=account();
-  const chosen=Array.isArray(user?.genres)?user.genres:[];
-
+  const content=$("onboardingContent");content.replaceChildren();
+  const h=document.createElement("h2");h.id="onboardingTitle";h.textContent="What genres do you enjoy?";
+  const p=document.createElement("p");p.textContent="Choose any genres you’re interested in writing or reading.";
+  const grid=document.createElement("div");grid.className="genre-grid";
+  const user=account(),chosen=Array.isArray(user?.genres)?user.genres:[];
   genres.forEach((genre,index)=>{
-    const label=document.createElement("label");
-    label.className="genre-option";
-
-    const input=document.createElement("input");
-    input.type="checkbox";
-    input.name="genre";
-    input.value=genre;
-    input.checked=chosen.includes(genre);
-    input.id="genre"+index;
-
-    const span=document.createElement("span");
-    span.textContent=genre;
-
-    label.append(input,span);
-    grid.append(label);
+    const label=document.createElement("label");label.className="genre-option";
+    const input=document.createElement("input");input.type="checkbox";input.name="genre";input.value=genre;input.checked=chosen.includes(genre);input.id="genre"+index;
+    const span=document.createElement("span");span.textContent=genre;label.append(input,span);grid.append(label);
   });
-
   content.append(h,p,grid);
-
-  const actions=$("onboardingActions");
-  actions.replaceChildren();
-
-  const skip=document.createElement("button");
-  skip.className="skip-button";
-  skip.type="button";
-  skip.textContent="Skip for now";
-  skip.onclick=()=>finishOnboarding([]);
-
-  const save=document.createElement("button");
-  save.className="primary-button";
-  save.type="button";
-  save.textContent="Save my genres";
-  save.onclick=()=>finishOnboarding(
-    [...document.querySelectorAll('input[name="genre"]:checked')].map(input=>input.value)
-  );
-
+  const actions=$("onboardingActions");actions.replaceChildren();
+  const skip=document.createElement("button");skip.className="skip-button";skip.type="button";skip.textContent="Skip for now";skip.onclick=()=>finishOnboarding([]);
+  const save=document.createElement("button");save.className="primary-button";save.type="button";save.textContent="Save my genres";
+  save.onclick=()=>finishOnboarding([...document.querySelectorAll('input[name="genre"]:checked')].map(input=>input.value));
   actions.append(skip,save);
 }
 function finishOnboarding(selected){
-  const user=account();
-  if(user){
-    user.genres=selected;
-    user.tutorialCompleted=true;
-    saveAccount(user);
-  }
-  $("onboarding").classList.add("hidden");
-  toast(selected.length?"Genres saved. Happy writing!":"You’re all set. Happy writing!");
+  const user=account();if(user){user.genres=selected;user.tutorialCompleted=true;saveAccount(user)}
+  $("onboarding").classList.add("hidden");toast(selected.length?"Genres saved. Happy writing!":"You’re all set. Happy writing!");
 }
-$("onboarding").addEventListener("keydown",event=>{
-  if(event.key==="Escape")showGenres();
-});
+$("onboarding").addEventListener("keydown",event=>{if(event.key==="Escape")showGenres()});
 
-/* Start saved session or show login */
+/* Always start on the login screen. Login/signup accounts remain saved in this browser. */
 setTheme(localStorage.getItem("novelpea-mobile-theme")==="dark");
-
-if(localStorage.getItem(SESSION_KEY)==="true"){
-  const user=account();
-  if(user){
-    enterApp(user);
-    if(!user.tutorialCompleted)startTutorial();
-  }else{
-    localStorage.removeItem(SESSION_KEY);
-  }
-}
+$("app").classList.add("hidden");
+$("authScreen").classList.remove("hidden");
+setAuthMode(false);
 </script>
 </body>
 </html>
