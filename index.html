@@ -39,9 +39,9 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 .auth-tab.active{color:var(--green);border-bottom-color:var(--green)}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:13px}
 .field label{color:var(--muted);font-size:11px;font-weight:700}
-.field input,.field textarea{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--ink)}
+.field input,.field textarea,.field select{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--ink)}
 .field textarea{min-height:100px;resize:vertical}
-.field input:focus,.field textarea:focus{outline:2px solid var(--green);outline-offset:1px}
+.field input:focus,.field textarea:focus,.field select:focus{outline:2px solid var(--green);outline-offset:1px}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
 .field.full{grid-column:1/-1}
 .form-error{min-height:17px;margin:0 0 8px;color:#b74b3c;font-size:12px}
@@ -95,7 +95,8 @@ textarea::placeholder{color:var(--muted);opacity:.75}
 .profile-section h3{margin:0 0 11px;font:600 20px Georgia,serif}
 .profile-books{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .profile-book{min-width:0;padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
-.profile-book-cover{height:112px;display:grid;place-items:center;overflow:hidden;padding:10px;border-radius:8px;color:#fff8df;text-align:center;font:600 16px/1.15 Georgia,serif;overflow-wrap:anywhere}
+.profile-book-cover{height:135px;display:grid;place-items:center;overflow:hidden;padding:10px;border-radius:8px;color:#fff8df;text-align:center;font:600 16px/1.15 Georgia,serif;overflow-wrap:anywhere;background-size:cover;background-position:center}
+.profile-book-cover img{width:100%;height:100%;object-fit:cover}
 .cover-0{background:radial-gradient(circle at 50% 55%,#dfb96e 0 5%,#1b4a42 7% 30%,#102b2a 70%)}
 .cover-1{background:radial-gradient(circle at 50% 48%,#d1ad65 0 4%,#17475a 12%,#071c2b 65%)}
 .cover-2{background:linear-gradient(150deg,#ed7954,#e6b16c 48%,#8f3028)}
@@ -104,6 +105,9 @@ textarea::placeholder{color:var(--muted);opacity:.75}
 .cover-5{background:radial-gradient(circle at 50% 53%,#eacb79 0 5%,#17445b 8% 30%,#091d32 68%)}
 .profile-book-title{margin-top:8px;overflow-wrap:anywhere;font-size:12px;font-weight:700}
 .profile-book-meta{margin-top:4px;color:var(--muted);font-size:10px}
+.profile-book-description{margin-top:7px;color:var(--muted);font-size:11px;line-height:1.45;overflow-wrap:anywhere}
+.profile-book-genres{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+.genre-pill{padding:4px 7px;border-radius:20px;background:var(--green-soft);color:var(--green);font-size:9px}
 .profile-empty{padding:13px;border-radius:9px;background:var(--soft);color:var(--muted);font-size:12px;line-height:1.5}
 .profile-form{margin-top:17px;padding-top:17px;border-top:1px solid var(--line)}
 .profile-form .field textarea{min-height:90px}
@@ -146,24 +150,32 @@ textarea::placeholder{color:var(--muted);opacity:.75}
 .drawer-icon{width:22px;text-align:center;font-size:17px}
 .drawer-footer{margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
 
-/* Tutorial and toast */
-.onboarding{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:16px;background:#10231dcc}
-.onboarding-card{width:min(100%,560px);max-height:calc(100dvh - 32px);overflow:auto;padding:23px;border:1px solid var(--line);border-radius:17px;background:var(--surface);box-shadow:0 25px 80px #0003}
+/* Tutorial, publish dialog, and toast */
+.onboarding,.publish-dialog-backdrop{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:16px;background:#10231dcc}
+.onboarding-card,.publish-dialog{width:min(100%,560px);max-height:calc(100dvh - 32px);overflow:auto;padding:23px;border:1px solid var(--line);border-radius:17px;background:var(--surface);box-shadow:0 25px 80px #0003}
 .onboarding-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .onboarding-brand{display:flex;align-items:center;gap:8px;color:var(--green);font-weight:700}
 .onboarding-count{color:var(--muted);font-size:11px}
-.onboarding-card h2{margin:0 0 9px;font:600 27px Georgia,serif}
-.onboarding-card p{color:var(--muted);line-height:1.65}
+.onboarding-card h2,.publish-dialog h2{margin:0 0 9px;font:600 27px Georgia,serif}
+.onboarding-card p,.publish-dialog-intro{color:var(--muted);line-height:1.65}
 .tutorial-tip{margin:17px 0;padding:14px;border-radius:11px;background:var(--green-soft);color:var(--green);line-height:1.6}
 .onboarding-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:20px}
 .action-group{display:flex;gap:8px}
 .skip-button{border:0;background:transparent;color:var(--muted);font-size:11px;text-decoration:underline}
-.genre-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:17px 0}
-.genre-option{position:relative}
-.genre-option input{position:absolute;opacity:0}
-.genre-option span{min-height:42px;padding:8px;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;background:var(--surface);text-align:center;font-size:11px;font-weight:650}
-.genre-option input:checked+span{border-color:var(--green);background:var(--green-soft);color:var(--green)}
-.genre-option input:focus-visible+span{outline:2px solid #63a27d;outline-offset:2px}
+.genre-grid,.publish-genre-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:17px 0}
+.genre-option,.publish-genre-option{position:relative}
+.genre-option input,.publish-genre-option input{position:absolute;opacity:0}
+.genre-option span,.publish-genre-option span{min-height:42px;padding:8px;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;background:var(--surface);text-align:center;font-size:11px;font-weight:650}
+.genre-option input:checked+span,.publish-genre-option input:checked+span{border-color:var(--green);background:var(--green-soft);color:var(--green)}
+.genre-option input:focus-visible+span,.publish-genre-option input:focus-visible+span{outline:2px solid #63a27d;outline-offset:2px}
+.publish-dialog-backdrop{z-index:11;background:#1018109c}
+.publish-dialog{width:min(100%,580px);padding:20px;border-radius:16px}
+.publish-dialog h2{font-size:25px}
+.publish-dialog-intro{margin:0 0 18px;font-size:13px}
+.publish-genre-list{margin:0}
+.publish-cover-preview{width:120px;height:155px;display:grid;place-items:center;overflow:hidden;margin:8px 0 10px;padding:12px;border-radius:9px;background:linear-gradient(145deg,#365b42,#77926d);color:white;text-align:center;font:600 17px/1.2 Georgia,serif;overflow-wrap:anywhere;background-size:cover;background-position:center}
+.publish-cover-preview img{width:100%;height:100%;object-fit:cover}
+.publish-dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}
 .toast{position:fixed;z-index:12;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,10px);opacity:0;pointer-events:none;max-width:calc(100% - 30px);padding:11px 15px;border-radius:10px;background:#293a2d;color:white;font-size:12px;transition:.2s}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 @media(min-width:760px){
@@ -178,6 +190,9 @@ textarea::placeholder{color:var(--muted);opacity:.75}
   .mobile-drawer,.menu-backdrop{display:none}
   .genre-grid{grid-template-columns:repeat(3,1fr)}
   .profile-books{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}
+}
+@media(max-width:420px){
+  .publish-dialog{padding:15px}
 }
 </style>
 </head>
@@ -298,8 +313,49 @@ textarea::placeholder{color:var(--muted);opacity:.75}
     <div class="onboarding-actions" id="onboardingActions"></div>
   </div>
 </div>
+
+<div class="publish-dialog-backdrop hidden" id="publishDialogBackdrop">
+  <section class="publish-dialog" role="dialog" aria-modal="true" aria-labelledby="publishDialogTitle">
+    <h2 id="publishDialogTitle">Publish your novel</h2>
+    <p class="publish-dialog-intro">Add the details readers will see. You can skip the cover; the other fields are required.</p>
+    <form id="publishForm">
+      <div class="field">
+        <label for="publishTitle">Novel title</label>
+        <input id="publishTitle" maxlength="120" required>
+      </div>
+      <div class="field">
+        <label for="publishShortDescription">Short description</label>
+        <textarea id="publishShortDescription" maxlength="240" required placeholder="A brief hook for readers (up to 240 characters)"></textarea>
+      </div>
+      <div class="field">
+        <label for="publishLongDescription">Long description</label>
+        <textarea id="publishLongDescription" maxlength="3000" required placeholder="Tell readers more about the story (up to 3,000 characters)"></textarea>
+      </div>
+      <div class="field">
+        <label>Genres — choose at least one</label>
+        <div class="publish-genre-list" id="publishGenreList"></div>
+      </div>
+      <div class="field">
+        <label for="publishCover">Cover image (optional)</label>
+        <input id="publishCover" type="file" accept="image/*">
+        <small class="auth-note">Choose an image from your device. It will be resized before saving.</small>
+        <div id="publishCoverPreview" class="publish-cover-preview" aria-label="Cover preview">Cover preview</div>
+        <button class="secondary-button hidden" id="removePublishCover" type="button">Remove cover</button>
+      </div>
+      <p class="form-error" id="publishError"></p>
+      <div class="publish-dialog-actions">
+        <button class="secondary-button" id="cancelPublish" type="button">Cancel</button>
+        <button class="primary-button" type="submit">Publish novel</button>
+      </div>
+    </form>
+  </section>
+</div>
+
 <div class="toast" id="toast" role="status"></div>
+
 <script>
+"use strict";
+
 const $=id=>document.getElementById(id);
 const ACCOUNT_KEY="novelpea-mobile-account-v2";
 const SESSION_KEY="novelpea-mobile-session-v2";
@@ -317,21 +373,33 @@ const makeId=()=>window.crypto?.randomUUID?.()||"id-"+Date.now()+"-"+Math.random
 
 function makeProject(title="My Novel"){
   const chapter={id:makeId(),title:"Chapter One",text:""};
-  return {id:makeId(),title,genre:"Novel",status:"progress",chapters:[chapter],activeChapterId:chapter.id,bible:"",characters:"",places:"",notes:""};
+  return {
+    id:makeId(),title,genre:"Novel",genres:[],status:"progress",
+    shortDescription:"",longDescription:"",coverImage:"",
+    chapters:[chapter],activeChapterId:chapter.id,
+    bible:"",characters:"",places:"",notes:""
+  };
 }
 function readJSON(key,fallback){
-  try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}
+  try{return JSON.parse(localStorage.getItem(key))??fallback}
+  catch{return fallback}
 }
+
 let projects=readJSON(PROJECT_KEY,[]);
 if(!Array.isArray(projects))projects=[];
 if(!projects.length)projects=[makeProject()];
 
 projects.forEach(item=>{
   if(!item.genre)item.genre="Novel";
+  if(!Array.isArray(item.genres))item.genres=[];
+  if(typeof item.shortDescription!=="string")item.shortDescription="";
+  if(typeof item.longDescription!=="string")item.longDescription="";
+  if(typeof item.coverImage!=="string")item.coverImage="";
   if(!item.status)item.status="progress";
   if(!Array.isArray(item.chapters)||!item.chapters.length){
     const chapter={id:makeId(),title:"Chapter One",text:""};
-    item.chapters=[chapter];item.activeChapterId=chapter.id;
+    item.chapters=[chapter];
+    item.activeChapterId=chapter.id;
   }
   item.chapters.forEach(chapter=>{
     if(!chapter.id)chapter.id=makeId();
@@ -342,14 +410,21 @@ projects.forEach(item=>{
     item.activeChapterId=item.chapters[0].id;
   }
 });
+
 let project=projects.find(item=>item.id===localStorage.getItem(PROJECT_KEY+"-active"))||projects[0];
 let saveTimer=null,tutorialStep=0,currentPage="write",toastTimer=null;
+let publishingNovel=null,pendingCoverData="";
 
 function account(){return readJSON(ACCOUNT_KEY,null)}
 function saveAccount(user){localStorage.setItem(ACCOUNT_KEY,JSON.stringify(user))}
 function saveProjects(){
-  localStorage.setItem(PROJECT_KEY,JSON.stringify(projects));
-  localStorage.setItem(PROJECT_KEY+"-active",project.id);
+  try{
+    localStorage.setItem(PROJECT_KEY,JSON.stringify(projects));
+    localStorage.setItem(PROJECT_KEY+"-active",project.id);
+  }catch(error){
+    console.error(error);
+    toast("Could not save. Browser storage may be full.");
+  }
 }
 function activeChapter(){
   return project.chapters.find(chapter=>chapter.id===project.activeChapterId)||project.chapters[0];
@@ -358,7 +433,7 @@ function toast(message){
   $("toast").textContent=message;
   $("toast").classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>$("toast").classList.remove("show"),2300);
+  toastTimer=setTimeout(()=>$("toast").classList.remove("show"),2500);
 }
 function wordCount(text){
   const clean=(text||"").trim();
@@ -371,6 +446,7 @@ function canPublish(novel){
   return novel.chapters.length>=3&&novelWords(novel)>=2500;
 }
 
+/* Theme */
 function setTheme(dark){
   document.body.classList.toggle("dark",dark);
   $("themeButton").textContent=dark?"☀️":"🌙";
@@ -378,8 +454,12 @@ function setTheme(dark){
   localStorage.setItem("novelpea-mobile-theme",dark?"dark":"light");
 }
 $("themeButton").onclick=()=>setTheme(!document.body.classList.contains("dark"));
-$("drawerTheme").onclick=()=>{setTheme(!document.body.classList.contains("dark"));closeDrawer()};
+$("drawerTheme").onclick=()=>{
+  setTheme(!document.body.classList.contains("dark"));
+  closeDrawer();
+};
 
+/* Navigation drawer */
 function openDrawer(){
   $("mobileDrawer").classList.add("open");
   $("menuBackdrop").classList.add("open");
@@ -396,13 +476,16 @@ function closeDrawer(){
 $("openDrawer").onclick=openDrawer;
 $("closeDrawer").onclick=closeDrawer;
 $("menuBackdrop").onclick=closeDrawer;
+
 document.addEventListener("keydown",event=>{
   if(event.key==="Escape"){
     closeDrawer();
+    if(!$("publishDialogBackdrop").classList.contains("hidden"))closePublishDialog();
     if(!$("onboarding").classList.contains("hidden"))showGenres();
   }
 });
 
+/* Authentication */
 function setAuthMode(signup){
   $("loginForm").classList.toggle("hidden",signup);
   $("signupForm").classList.toggle("hidden",!signup);
@@ -432,6 +515,7 @@ $("signupForm").addEventListener("submit",event=>{
   event.preventDefault();
   const age=Number($("age").value);
   const birthday=$("birthday").value;
+
   if(age<13||age>120){
     $("signupError").textContent="Enter an age between 13 and 120.";
     return;
@@ -440,10 +524,18 @@ $("signupForm").addEventListener("submit",event=>{
     $("signupError").textContent="Enter a valid birthday that is not in the future.";
     return;
   }
+
+  const existing=account();
+  const email=$("signupEmail").value.trim().toLowerCase();
+  if(existing&&existing.email===email){
+    $("signupError").textContent="An account with that email already exists. Please log in.";
+    return;
+  }
+
   const user={
     fullName:$("fullName").value.trim(),
     penName:$("penName").value.trim(),
-    email:$("signupEmail").value.trim().toLowerCase(),
+    email,
     age,birthday,
     birthplace:$("birthplace").value.trim(),
     bio:"",location:"",website:"",writingAbout:"",
@@ -451,6 +543,7 @@ $("signupForm").addEventListener("submit",event=>{
     tutorialCompleted:false,
     password:$("signupPassword").value
   };
+
   saveAccount(user);
   $("signupError").textContent="";
   enterApp(user,{newAccount:true});
@@ -459,10 +552,12 @@ $("signupForm").addEventListener("submit",event=>{
 $("loginForm").addEventListener("submit",event=>{
   event.preventDefault();
   const user=account();
+
   if(!user||user.email!==$("loginEmail").value.trim().toLowerCase()||user.password!==$("loginPassword").value){
     $("loginError").textContent="Email or password is incorrect.";
     return;
   }
+
   $("loginError").textContent="";
   enterApp(user);
 });
@@ -477,6 +572,7 @@ $("drawerLogout").onclick=()=>{
   setAuthMode(false);
 };
 
+/* Manuscript saving and editing */
 function persistCurrent(){
   const chapter=activeChapter();
   if(chapter){
@@ -510,6 +606,7 @@ function resizeTitle(){
 function renderChapterOptions(){
   const select=$("chapterSelect");
   select.replaceChildren();
+
   project.chapters.forEach((chapter,index)=>{
     const option=document.createElement("option");
     option.value=chapter.id;
@@ -523,6 +620,7 @@ function render(){
     project=makeProject(project.title);
     projects.push(project);
   }
+
   const chapter=activeChapter();
   project.activeChapterId=chapter.id;
   $("novelTitle").value=project.title||"Untitled novel";
@@ -535,11 +633,18 @@ function render(){
   saveProjects();
 }
 $("novelTitle").addEventListener("input",scheduleSave);
-$("chapterTitle").addEventListener("input",()=>{resizeTitle();scheduleSave()});
-$("chapterText").addEventListener("input",()=>{updateCounts();scheduleSave()});
+$("chapterTitle").addEventListener("input",()=>{
+  resizeTitle();
+  scheduleSave();
+});
+$("chapterText").addEventListener("input",()=>{
+  updateCounts();
+  scheduleSave();
+});
 
 function setPage(page){
   currentPage=page;
+
   const isWrite=page==="write";
   const isProfile=page==="profile";
   const isNovels=page==="novels";
@@ -628,6 +733,7 @@ $("drawerDeleteChapter").onclick=()=>{
     return;
   }
   if(!confirm("Delete this chapter? This cannot be undone."))return;
+
   project.chapters=project.chapters.filter(chapter=>chapter.id!==project.activeChapterId);
   project.activeChapterId=project.chapters[0].id;
   saveProjects();
@@ -639,7 +745,9 @@ $("drawerDeleteChapter").onclick=()=>{
 
 $("drawerExport").onclick=()=>{
   persistCurrent();
-  const text=project.title+"\n\n"+project.chapters.map(chapter=>`${chapter.title}\n\n${chapter.text}`).join("\n\n\n");
+
+  const text=project.title+"\n\n"+
+    project.chapters.map(chapter=>`${chapter.title}\n\n${chapter.text}`).join("\n\n\n");
   const url=URL.createObjectURL(new Blob([text],{type:"text/plain;charset=utf-8"}));
   const link=document.createElement("a");
   link.href=url;
@@ -654,7 +762,10 @@ document.querySelectorAll("[data-mark]").forEach(button=>{
   button.onclick=()=>{
     const editor=$("chapterText");
     const start=editor.selectionStart,end=editor.selectionEnd;
-    if(start===end){toast("Select text first.");return}
+    if(start===end){
+      toast("Select text first.");
+      return;
+    }
     const mark=button.dataset.mark;
     const selected=editor.value.slice(start,end);
     editor.setRangeText(mark+selected+mark,start,end,"select");
@@ -662,9 +773,151 @@ document.querySelectorAll("[data-mark]").forEach(button=>{
     updateCounts();
     scheduleSave();
   };
+};
+
+/* Publish dialog */
+function openPublishDialog(novel){
+  if(!canPublish(novel)){
+    toast("Publishing requires at least 3 chapters and 2,500 words.");
+    return;
+  }
+
+  publishingNovel=novel;
+  pendingCoverData=novel.coverImage||"";
+  $("publishForm").reset();
+  $("publishError").textContent="";
+  $("publishTitle").value=novel.title==="My Novel"?"":(novel.title||"");
+  $("publishShortDescription").value=novel.shortDescription||"";
+  $("publishLongDescription").value=novel.longDescription||"";
+  $("publishCover").value="";
+
+  const list=$("publishGenreList");
+  list.replaceChildren();
+  const selectedGenres=Array.isArray(novel.genres)?novel.genres:[];
+
+  genres.forEach((genre,index)=>{
+    const label=document.createElement("label");
+    label.className="publish-genre-option";
+
+    const input=document.createElement("input");
+    input.type="checkbox";
+    input.name="publishGenre";
+    input.value=genre;
+    input.checked=selectedGenres.includes(genre);
+    input.id="publishGenre"+index;
+
+    const span=document.createElement("span");
+    span.textContent=genre;
+
+    label.append(input,span);
+    list.append(label);
+  });
+
+  updatePublishCoverPreview();
+  $("removePublishCover").classList.toggle("hidden",!pendingCoverData);
+  $("publishDialogBackdrop").classList.remove("hidden");
+  $("publishTitle").focus();
+}
+function closePublishDialog(){
+  $("publishDialogBackdrop").classList.add("hidden");
+  publishingNovel=null;
+  pendingCoverData="";
+}
+function updatePublishCoverPreview(){
+  const preview=$("publishCoverPreview");
+  preview.replaceChildren();
+
+  if(pendingCoverData){
+    const image=document.createElement("img");
+    image.src=pendingCoverData;
+    image.alt="Selected novel cover preview";
+    preview.append(image);
+  }else{
+    preview.textContent=$("publishTitle").value.trim()||"Cover preview";
+    preview.style.backgroundImage="";
+  }
+}
+$("publishTitle").addEventListener("input",updatePublishCoverPreview);
+
+$("publishCover").addEventListener("change",()=>{
+  const file=$("publishCover").files?.[0];
+  if(!file)return;
+
+  if(!file.type.startsWith("image/")){
+    $("publishError").textContent="Please select an image file.";
+    $("publishCover").value="";
+    return;
+  }
+
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const source=new Image();
+    source.onload=()=>{
+      const limit=700;
+      const scale=Math.min(1,limit/Math.max(source.width,source.height));
+      const canvas=document.createElement("canvas");
+      canvas.width=Math.max(1,Math.round(source.width*scale));
+      canvas.height=Math.max(1,Math.round(source.height*scale));
+
+      const context=canvas.getContext("2d");
+      context.drawImage(source,0,0,canvas.width,canvas.height);
+      pendingCoverData=canvas.toDataURL("image/jpeg",0.78);
+      $("publishError").textContent="";
+      $("removePublishCover").classList.remove("hidden");
+      updatePublishCoverPreview();
+    };
+    source.onerror=()=>{$("publishError").textContent="Could not read that image. Try another one."};
+    source.src=reader.result;
+  };
+  reader.onerror=()=>{$("publishError").textContent="Could not load that image. Try another one."};
+  reader.readAsDataURL(file);
 });
 
-/* Novel cards, delete buttons, and published novels */
+$("removePublishCover").onclick=()=>{
+  pendingCoverData="";
+  $("publishCover").value="";
+  $("removePublishCover").classList.add("hidden");
+  updatePublishCoverPreview();
+};
+$("cancelPublish").onclick=closePublishDialog;
+$("publishDialogBackdrop").addEventListener("click",event=>{
+  if(event.target===$("publishDialogBackdrop"))closePublishDialog();
+});
+
+$("publishForm").addEventListener("submit",event=>{
+  event.preventDefault();
+  if(!publishingNovel)return;
+
+  const title=$("publishTitle").value.trim();
+  const shortDescription=$("publishShortDescription").value.trim();
+  const longDescription=$("publishLongDescription").value.trim();
+  const selected=[...document.querySelectorAll('input[name="publishGenre"]:checked')]
+    .map(input=>input.value);
+
+  if(!title){$("publishError").textContent="Enter a title for your novel.";return}
+  if(!shortDescription){$("publishError").textContent="Add a short description.";return}
+  if(!longDescription){$("publishError").textContent="Add a long description.";return}
+  if(!selected.length){$("publishError").textContent="Choose at least one genre.";return}
+
+  publishingNovel.title=title;
+  publishingNovel.shortDescription=shortDescription;
+  publishingNovel.longDescription=longDescription;
+  publishingNovel.genres=selected;
+  publishingNovel.genre=selected.join(", ");
+  publishingNovel.coverImage=pendingCoverData;
+  publishingNovel.status="published";
+  publishingNovel.publishedAt=publishingNovel.publishedAt||new Date().toISOString();
+
+  saveProjects();
+  closePublishDialog();
+  toast("Novel published.");
+
+  if(currentPage==="published")renderPublishedNovels();
+  else if(currentPage==="novels")renderNovelsScreen();
+  else if(currentPage==="profile")renderProfile(account(),false);
+});
+
+/* Novel cards and lists */
 function deleteNovel(novel){
   const title=novel.title||"Untitled novel";
   if(!confirm(`Delete "${title}" and all its chapters? This cannot be undone.`))return;
@@ -694,19 +947,50 @@ function createNovelCard(novel,index){
   card.className="profile-book";
 
   const cover=document.createElement("div");
-  cover.className="profile-book-cover cover-"+(index%6);
-  cover.textContent=novel.title||"Untitled novel";
+  cover.className="profile-book-cover";
+
+  if(novel.coverImage){
+    const image=document.createElement("img");
+    image.src=novel.coverImage;
+    image.alt=`Cover for ${novel.title||"Untitled novel"}`;
+    cover.append(image);
+  }else{
+    cover.classList.add("cover-"+(index%6));
+    cover.textContent=novel.title||"Untitled novel";
+  }
 
   const title=document.createElement("div");
   title.className="profile-book-title";
   title.textContent=novel.title||"Untitled novel";
 
+  const genreNames=Array.isArray(novel.genres)&&novel.genres.length
+    ?novel.genres
+    :(novel.genre?[novel.genre]:[]);
+
   const meta=document.createElement("div");
   meta.className="profile-book-meta";
-  const chapters=novel.chapters.length;
-  const words=novelWords(novel);
-  meta.textContent=`${novel.genre||"Novel"} · ${chapters} chapter${chapters===1?"":"s"} · ${words.toLocaleString()} words`;
+  meta.textContent=`${genreNames.join(", ")||"Novel"} · ${novel.chapters.length} chapter${novel.chapters.length===1?"":"s"} · ${novelWords(novel).toLocaleString()} words`;
+
   card.append(cover,title,meta);
+
+  if(novel.shortDescription){
+    const description=document.createElement("div");
+    description.className="profile-book-description";
+    description.textContent=novel.shortDescription;
+    card.append(description);
+  }
+
+  if(genreNames.length){
+    const pills=document.createElement("div");
+    pills.className="profile-book-genres";
+    genreNames.forEach(genre=>{
+      const pill=document.createElement("span");
+      pill.className="genre-pill";
+      pill.textContent=genre;
+      pills.append(pill);
+    });
+    card.append(pills);
+  }
 
   if(novel.status==="published"){
     const badge=document.createElement("span");
@@ -724,19 +1008,7 @@ function createNovelCard(novel,index){
   publish.textContent=novel.status==="published"?"Published":"Publish";
   publish.disabled=novel.status==="published"||!canPublish(novel);
   publish.title=canPublish(novel)?"Publish this novel":"Requires 3 chapters and 2,500 words";
-  publish.onclick=()=>{
-    if(!canPublish(novel)){
-      toast("Publishing requires at least 3 chapters and 2,500 words.");
-      return;
-    }
-    novel.status="published";
-    novel.publishedAt=novel.publishedAt||new Date().toISOString();
-    saveProjects();
-    toast("Novel published.");
-    if(currentPage==="published")renderPublishedNovels();
-    else if(currentPage==="novels")renderNovelsScreen();
-    else renderProfile(account(),false);
-  };
+  publish.onclick=()=>openPublishDialog(novel);
   actions.append(publish);
 
   const open=document.createElement("button");
@@ -766,23 +1038,27 @@ function createNovelCard(novel,index){
   if(novel.status!=="published"){
     const requirements=document.createElement("div");
     requirements.className="publish-requirements";
+
+    const chaptersNeeded=Math.max(0,3-novel.chapters.length);
+    const wordsNeeded=Math.max(0,2500-novelWords(novel));
+
     requirements.textContent=canPublish(novel)
       ?"Ready to publish."
-      :`Need ${Math.max(0,3-chapters)} more chapter${3-chapters===1?"":"s"} and ${Math.max(0,2500-words).toLocaleString()} more words to publish.`;
+      :`Need ${chaptersNeeded} more chapter${chaptersNeeded===1?"":"s"} and ${wordsNeeded.toLocaleString()} more words to publish.`;
+
     card.append(requirements);
   }
+
   return card;
 }
 
 function renderProfileNovels(container){
   const section=document.createElement("section");
   section.className="profile-section";
+
   const heading=document.createElement("h3");
   heading.textContent="My novels";
   section.append(heading);
-
-  const books=document.createElement("div");
-  books.className="profile-books";
 
   if(!projects.length){
     const empty=document.createElement("div");
@@ -790,6 +1066,8 @@ function renderProfileNovels(container){
     empty.textContent="No novels yet. Create a novel to get started.";
     section.append(empty);
   }else{
+    const books=document.createElement("div");
+    books.className="profile-books";
     projects.forEach((novel,index)=>books.append(createNovelCard(novel,index)));
     section.append(books);
   }
@@ -823,6 +1101,7 @@ function renderProfile(user,editing){
   const intro=document.createElement("div");
   const name=document.createElement("h2");
   name.textContent=user.penName||"Writer";
+
   const tagline=document.createElement("p");
   tagline.textContent=user.writingAbout||"NovelPea writer";
   intro.append(name,tagline);
@@ -838,6 +1117,7 @@ function renderProfile(user,editing){
 
   const details=document.createElement("div");
   details.className="profile-details";
+
   if(user.location){
     const item=document.createElement("span");
     item.className="profile-detail";
@@ -966,8 +1246,10 @@ function renderNovelListScreen(titleText,subtitleText,list){
 
   const heading=document.createElement("div");
   heading.className="novel-screen-header";
+
   const title=document.createElement("h2");
   title.textContent=titleText;
+
   const subtitle=document.createElement("p");
   subtitle.textContent=subtitleText;
   heading.append(title,subtitle);
@@ -998,7 +1280,10 @@ function renderPublishedNovels(){
     projects.filter(novel=>novel.status==="published")
   );
 }
-$("drawerProfile").onclick=()=>{showProfile();closeDrawer()};
+$("drawerProfile").onclick=()=>{
+  showProfile();
+  closeDrawer();
+};
 
 /* Settings and account deletion */
 function renderSettings(){
@@ -1013,11 +1298,33 @@ function renderSettings(){
 
   const heading=document.createElement("h2");
   heading.textContent="Settings";
+
   const description=document.createElement("p");
   description.textContent="Manage your NovelPea account and saved data.";
 
+  const themeButton=document.createElement("button");
+  themeButton.type="button";
+  themeButton.className="secondary-button";
+  themeButton.textContent=document.body.classList.contains("dark")
+    ?"Switch to light mode":"Switch to dark mode";
+  themeButton.onclick=()=>{
+    setTheme(!document.body.classList.contains("dark"));
+    renderSettings();
+  };
+
+  const exportButton=document.createElement("button");
+  exportButton.type="button";
+  exportButton.className="secondary-button";
+  exportButton.textContent="Export active novel";
+  exportButton.onclick=exportNovel;
+
+  const dataNotice=document.createElement("div");
+  dataNotice.className="readonly-note";
+  dataNotice.textContent="Your account and novels are stored in this browser on this device. Clearing browser data may erase them.";
+
   const danger=document.createElement("section");
   danger.className="settings-danger";
+
   const dangerHeading=document.createElement("h3");
   dangerHeading.textContent="Delete account";
 
@@ -1031,14 +1338,22 @@ function renderSettings(){
   deleteButton.onclick=deleteAccount;
 
   danger.append(dangerHeading,warning,deleteButton);
-  panel.append(back,heading,description,danger);
+  panel.append(back,heading,description,themeButton,exportButton,dataNotice,danger);
 }
-
+function exportNovel(){
+  persistCurrent();
+  const text=project.title+"\n\n"+
+    project.chapters.map(chapter=>`${chapter.title}\n\n${chapter.text}`).join("\n\n\n");
+  const url=URL.createObjectURL(new Blob([text],{type:"text/plain;charset=utf-8"}));
+  const link=document.createElement("a");
+  link.href=url;
+  link.download=(project.title||"novel").replace(/[^\w-]+/g,"-").toLowerCase()+".txt";
+  link.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  toast("Novel exported.");
+}
 function deleteAccount(){
-  const confirmed=confirm(
-    "Permanently delete your account and all NovelPea novels saved in this browser? This cannot be undone."
-  );
-  if(!confirmed)return;
+  if(!confirm("Permanently delete your account and all NovelPea novels saved in this browser? This cannot be undone."))return;
 
   localStorage.removeItem(ACCOUNT_KEY);
   localStorage.removeItem(SESSION_KEY);
@@ -1067,11 +1382,11 @@ $("drawerSettings").onclick=()=>{
   closeDrawer();
 };
 
-/* Tutorial and genre preferences */
+/* Onboarding and genre preferences */
 const tutorialSteps=[
   ["Welcome to NovelPea","This is your writing space. We’ll take a quick tour, and you can skip it whenever you like.","Your work is saved in this browser on this device."],
   ["Write your manuscript","Type in the large editor. Tap the chapter title to rename it. Your writing saves automatically.","Use the chapter picker to switch chapters, or tap ＋ Chapter to add one."],
-  ["Plan your story","Open the menu to find Story Bible, Characters, Places, and Notes. Each section saves separately with your novel.","The formatting buttons work on text you select in the editor."],
+  ["Plan your story","Open the menu to find Story Bible, Characters, Places, and Notes. Each section saves with your novel.","The formatting buttons work on text you select in the editor."],
   ["Manage your novels","View your drafts and published stories on your profile. Publishing requires at least 3 chapters and 2,500 words.","This demo saves your novels in this browser."]
 ];
 
@@ -1083,17 +1398,21 @@ function startTutorial(){
 function renderTutorial(){
   const [title,text,tip]=tutorialSteps[tutorialStep];
   $("onboardingCount").textContent=`Step ${tutorialStep+1} of ${tutorialSteps.length}`;
+
   const content=$("onboardingContent");
   content.replaceChildren();
 
   const h=document.createElement("h2");
   h.id="onboardingTitle";
   h.textContent=title;
+
   const p=document.createElement("p");
   p.textContent=text;
+
   const t=document.createElement("div");
   t.className="tutorial-tip";
   t.textContent=tip;
+
   content.append(h,p,t);
 
   const actions=$("onboardingActions");
@@ -1114,7 +1433,10 @@ function renderTutorial(){
     back.className="secondary-button";
     back.type="button";
     back.textContent="Back";
-    back.onclick=()=>{tutorialStep--;renderTutorial()};
+    back.onclick=()=>{
+      tutorialStep--;
+      renderTutorial();
+    };
     group.append(back);
   }
 
@@ -1126,45 +1448,55 @@ function renderTutorial(){
     if(tutorialStep<tutorialSteps.length-1){
       tutorialStep++;
       renderTutorial();
-    }else showGenres();
+    }else{
+      showGenres();
+    }
   };
   group.append(next);
   actions.append(group);
 }
-
 function showGenres(){
   $("onboardingCount").textContent="Your writing interests";
+
   const content=$("onboardingContent");
   content.replaceChildren();
 
   const h=document.createElement("h2");
   h.id="onboardingTitle";
   h.textContent="What genres do you enjoy?";
+
   const p=document.createElement("p");
   p.textContent="Choose any genres you’re interested in writing or reading.";
+
   const grid=document.createElement("div");
   grid.className="genre-grid";
 
   const user=account();
   const chosen=Array.isArray(user?.genres)?user.genres:[];
+
   genres.forEach((genre,index)=>{
     const label=document.createElement("label");
     label.className="genre-option";
+
     const input=document.createElement("input");
     input.type="checkbox";
     input.name="genre";
     input.value=genre;
     input.checked=chosen.includes(genre);
     input.id="genre"+index;
+
     const span=document.createElement("span");
     span.textContent=genre;
+
     label.append(input,span);
     grid.append(label);
   });
+
   content.append(h,p,grid);
 
   const actions=$("onboardingActions");
   actions.replaceChildren();
+
   const skip=document.createElement("button");
   skip.className="skip-button";
   skip.type="button";
@@ -1178,9 +1510,9 @@ function showGenres(){
   save.onclick=()=>finishOnboarding(
     [...document.querySelectorAll('input[name="genre"]:checked')].map(input=>input.value)
   );
+
   actions.append(skip,save);
 }
-
 function finishOnboarding(selected){
   const user=account();
   if(user){
@@ -1195,7 +1527,9 @@ $("onboarding").addEventListener("keydown",event=>{
   if(event.key==="Escape")showGenres();
 });
 
+/* Start saved session or show login */
 setTheme(localStorage.getItem("novelpea-mobile-theme")==="dark");
+
 if(localStorage.getItem(SESSION_KEY)==="true"){
   const user=account();
   if(user){
