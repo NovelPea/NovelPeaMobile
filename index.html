@@ -54,6 +54,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 11px}
 .field.full{grid-column:1/-1}
 .form-error{min-height:17px;margin:0 0 8px;color:var(--danger);font-size:11px}
+.comic-size-warning{min-height:0;margin:0 0 8px;color:var(--danger)}
 .primary,.submit-button{min-height:44px;padding:0 16px;border:0;border-radius:11px;background:var(--green);color:#fff;font-size:12px;font-weight:750;transition:transform .15s,filter .15s}
 .primary:hover,.submit-button:hover{filter:brightness(1.06);transform:translateY(-1px)}
 body.dark .primary,body.dark .submit-button{color:#142017}
@@ -611,12 +612,33 @@ function renderComicCreator(){
     if(panel.image){const img=document.createElement("img");img.src=panel.image;img.alt=`Artwork for panel ${index+1}`;art.append(img)}
     else art.textContent="Artwork preview";
 
-    const upload=document.createElement("input");upload.type="file";upload.accept="image/*";upload.setAttribute("aria-label",`Upload artwork for panel ${index+1}`);
+    const upload=document.createElement("input");
+    upload.type="file";
+    upload.accept="image/*";
+    upload.setAttribute("aria-label",`Upload artwork for panel ${index+1}`);
+
+    const sizeWarning=document.createElement("p");
+    sizeWarning.className="form-error comic-size-warning";
+    sizeWarning.setAttribute("role","alert");
+    sizeWarning.textContent="Image is too large. Please choose an image under 8 MB.";
+    sizeWarning.hidden=true;
+
     upload.onchange=()=>{
-      const file=upload.files?.[0];if(!file)return;
-      if(!file.type.startsWith("image/")){toast("Choose an image file.");return}
-      if(file.size>8*1024*1024){toast("Choose an image smaller than 8 MB.");return}
-      const reader=new FileReader();reader.onerror=()=>toast("Could not read that image.");
+      const file=upload.files?.[0];
+      if(!file)return;
+      if(!file.type.startsWith("image/")){
+        toast("Choose an image file.");
+        upload.value="";
+        return;
+      }
+      if(file.size>8*1024*1024){
+        sizeWarning.hidden=false;
+        upload.value="";
+        return;
+      }
+      sizeWarning.hidden=true;
+      const reader=new FileReader();
+      reader.onerror=()=>toast("Could not read that image.");
       reader.onload=()=>{panel.image=reader.result;saveAll();renderComicCreator()};
       reader.readAsDataURL(file)
     };
@@ -625,7 +647,7 @@ function renderComicCreator(){
     caption.oninput=()=>{panel.caption=caption.value;saveAll()};
     const dialogue=document.createElement("textarea");dialogue.maxLength=1000;dialogue.placeholder="Character dialogue";dialogue.value=panel.dialogue;
     dialogue.oninput=()=>{panel.dialogue=dialogue.value;saveAll()};
-    card.append(head,art,upload,caption,dialogue);container.append(card)
+    card.append(head,art,upload,sizeWarning,caption,dialogue);container.append(card)
   });
 }
 $("comicPageSelect").onchange=()=>{novel.activeComicPageId=$("comicPageSelect").value;saveAll();renderComicCreator()};
